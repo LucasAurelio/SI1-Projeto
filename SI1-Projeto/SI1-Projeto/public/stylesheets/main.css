@@ -1,0 +1,16 @@
+#pai{
+    width: 34%;
+    float: inherit;
+}
+
+#painel {
+    float: inherit;
+    width: 45%;
+    margin-left: 2%;
+}
+
+#painel2 {
+    float: inherit;
+    width: 45%;
+    margin-left: 2%;
+}
