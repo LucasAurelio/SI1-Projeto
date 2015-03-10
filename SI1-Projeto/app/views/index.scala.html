@@ -1,4 +1,4 @@
-@(users: List[User])
+@(users: List[User])(message: String)
 
 @main("Portal dos leites") {
     <title>Portal dos leites SI1</title>
@@ -42,7 +42,8 @@
             </div>
 
             <div class="panel-body" align="center">
-                <form method="get" action="">
+                <h1> @message</h1>
+                <form method="get" action="/user/fazLogin">
                     <h5 align="center">Nome</h5>
                     <input name="Nome" type="text" required/><br>
                     <h5 align="center">Senha</h5>
