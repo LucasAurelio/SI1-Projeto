@@ -46,6 +46,10 @@ public class Application extends Controller {
 
         List<User> users = dao.findAllByClassName(User.class.getName());
 
+        if (users.size()==0){
+            return ok(index.render(users,"Nome de cadastro inválido"));
+        }
+
         boolean notFound = true;
 
         for (User user: users){

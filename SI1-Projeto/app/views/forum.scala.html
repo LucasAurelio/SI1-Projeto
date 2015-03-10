@@ -1,6 +1,5 @@
 @(user: User)(message: String)
 
-
 <!DOCTYPE html>
 
 <html>
@@ -17,10 +16,12 @@
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
 
-    <header class="jumbotron">
-      <div class="container" align="center">
-        <h2>Bem vindo a aplicação web: Portal dos leites!</h2>
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">Meu Perfil</a>
+        </div>
       </div>
-    </header>
+    </div>
   </body>
 </html>
