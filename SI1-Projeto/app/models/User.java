@@ -7,17 +7,15 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    private String nome, email, senha, dataNascimento;
+    private String nome, email, senha;
 
     public User(){
-
     }
 
-    public User(String nome, String email, String senha, String dataNascimento)throws Exception{
+    public User(String nome, String email, String senha)throws Exception{
         setNome(nome);
         setEmail(email);
         setSenha(senha);
-        setDataNascimento(dataNascimento);
     }
 
     public long getId() {
@@ -62,17 +60,6 @@ public class User {
         this.senha = senha;
     }
 
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) throws Exception{
-        if(dataNascimento.equals("")){
-            throw new Exception("data de nascimento inválida");
-        }
-        this.dataNascimento = dataNascimento;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,7 +70,6 @@ public class User {
         if (!nome.equals(user.nome)) return false;
         if (!email.equals(user.email)) return false;
         if (!senha.equals(user.senha)) return false;
-        if (!dataNascimento.equals(user.dataNascimento)) return false;
         return true;
     }
 }

@@ -3,9 +3,12 @@
 # ~~~~
 
 # Home page
-GET         /                     controllers.Application.index()
-POST        /user                 controllers.Application.criaUsuario()
-GET        /user/fazLogin        controllers.Application.fazLogin()
+GET         /                    controllers.Application.index()
+GET         /login               controllers.Application.show()
+POST        /login               controllers.Application.authenticate()
+GET         /logout              controllers.Application.logout()
+GET         /registrar           controllers.Application.show()
+POST        /registrar           controllers.Application.registrar()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file         controllers.Assets.at(path="/public", file)
+GET         /assets/*file        controllers.Assets.at(path="/public", file)
