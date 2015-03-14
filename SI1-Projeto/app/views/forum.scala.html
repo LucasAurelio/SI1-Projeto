@@ -1,25 +1,51 @@
 @(message: String)
 
 @main("Meu Forum") {
-  <header class="jumbotron">
-    <div class="container" align="center">
-      <h2>Bem vindo a aplicação web: Portal dos leites!</h2>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8">
+    <title>Portal dos leites</title>
 
-  <div class="topbar">
-    <div class="fill">
-      <div class="container">
-        <a class="brand" href="/">Meu Perfil</a>
+  </head>
+
+  <body>
+    <div class="page-header">
+      <div class="container" align="center"><h2>Seja bem vindo a Aplicação web: Portal dos leites, @session().get("user")</h2></div>
+    </div>
+
+    <div id="sidebar" class="panel panel-default">
+      <div class="panel panel-heading"><h3>Perfil</h3></div>
+      <div class="panel panel-heading"><h3>Labs</h3></div>
+      <div class="panel panel-heading"><h3>Minitestes</h3></div>
+      <div class="panel panel-heading"><h3>Projeto</h3></div>
+      <div class="panel panel-heading"><h3>Links</h3></div>
+      <div class="panel panel-heading"><h3>FAQ</h3></div>
+      <div class="panel panel-heading"><h3>Créditos</h3></div>
+    </div>
+
+    <div id="painel" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 align="center">conteúdo</h3>
       </div>
+      <div class="panel-body" align="center"></div>
+
     </div>
-  </div>
 
-  <div class="col-sm-12">
-    <legend>
-      <a href="/logout" class="btn btn-danger pull-right"> LogOut</a>
-      <h3 class="text-center"> Bem Vindo(a)! @session.get("user") </h3>
-    </legend>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
+    <div class="page-header"></div>
 
-  </div>
+    <a href="/logout" class="btn btn-primary pull-left"> Log Out</a>
+
+  </body>
 }

@@ -1,20 +1,29 @@
-#pai{
-    width: 34%;
-    float: inherit;
+#sidebar {
+    float: left;
+    background: #eeeeee;
+    width: 20%;
+    height: 707px;
+    margin-bottom: 20px;
+    padding: 10px;
+
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
+}
+
+.panel {
+    margin: 2px;
+    height: 80px;
+    text-align: center;
+
 }
 
 #painel {
-    float: inherit;
-    width: 45%;
-    margin-left: 2%;
-}
+    float: right;
+    position: relative;
+    width: 78%;
+    height: 707px;
+    margin-bottom: 20px;
+    padding: 10px;
 
-#painel2 {
-    float: inherit;
-    width: 45%;
-    margin-left: 2%;
-}
-
-.fill{
-    padding-left: 200px;
 }
