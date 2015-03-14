@@ -48,12 +48,17 @@ public class Application extends Controller {
 
 
     private static boolean validateRegistro(String email) {
-        List<User> users = dao.findAllByClassName(User.class.getName());
-        for (User sameEmailUser: users){
-            if (sameEmailUser.getEmail().equals(email)){
+        List<User> u = dao.findByAttributeName("User", "email", email);
+        if (u == null || u.isEmpty()) {
+            return true;
+        }
+
+        for(int i = 0; i < u.size(); i++) {
+            if(u.get(i).getEmail().equals(email)){
                 return false;
             }
         }
+
         return true;
     }
 
@@ -69,7 +74,7 @@ public class Application extends Controller {
         User u = loginForm.bindFromRequest().get();
 
         String email = u.getEmail();
-        String senha = u.getSenha();
+        String senha = u.getPassword();
 
         if (loginForm.hasErrors() || !validateLogin(email, senha)) {
             flash("fail", "Email ou Senha Inválidos");
@@ -87,8 +92,10 @@ public class Application extends Controller {
         if (u == null || u.isEmpty()) {
             return false;
         }
-        if (!(u.get(0).getSenha().equals(senha))) {
-            return false;
+        for(int i = 0; i < u.size(); i++) {
+            if (!u.get(i).getPassword().equals(senha)) {
+                return false;
+            }
         }
         return true;
     }

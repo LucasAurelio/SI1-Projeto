@@ -7,15 +7,15 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    private String nome, email, senha;
+    private String nome, email, password;
 
     public User(){
     }
 
-    public User(String nome, String email, String senha)throws Exception{
+    public User(String nome, String email, String password)throws Exception{
         setNome(nome);
         setEmail(email);
-        setSenha(senha);
+        setPassword(password);
     }
 
     public long getId() {
@@ -48,16 +48,15 @@ public class User {
         this.email = email;
     }
 
-    public String getSenha() {
-
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) throws Exception{
-        if(senha.equals("")){
+    public void setPassword(String password) throws Exception{
+        if(password.equals("")){
             throw new Exception("senha inválida");
         }
-        this.senha = senha;
+        this.password = password;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class User {
 
         if (!nome.equals(user.nome)) return false;
         if (!email.equals(user.email)) return false;
-        if (!senha.equals(user.senha)) return false;
+        if (!password.equals(user.password)) return false;
         return true;
     }
 }

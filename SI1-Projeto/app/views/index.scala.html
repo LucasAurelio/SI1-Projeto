@@ -17,15 +17,13 @@
         @helper.form(routes.Application.authenticate) {
             <h1 class="text-center">LogIn</h1>
             <p>
-                <input type="email" name="email" placeholder="Email" value='@loginForm("email").value'
-                class="form-control">
+                <input type="email" name="email" placeholder="Email" value='@loginForm("email").value' class="form-control" required>
             </p>
             <p>
-                <input type="password" name="pass" placeholder="Password" class="form-control" value='@loginForm("senha").value'>
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
             </p>
             <div>
-                <button class="btn btn-primary" type="submit">Login</button>
-                <a class="btn btn-info" style="float:right;" href="/registrar"> Registrar</a>
+                <button class="btn btn-primary" style="float:center;" type="submit">Login</button>
             </div>
         }
     </div>
@@ -42,18 +40,17 @@
 
             <p>
                 <input type="text" name="nome" placeholder="Nome" value='@registroForm("nome").value'
-                class="form-control">
+                class="form-control" required>
             </p>
             <p>
                 <input type="email" name="email" placeholder="Email" value='@registroForm("email").value'
-                class="form-control">
+                class="form-control" required>
             </p>
             <p>
-                <input type="password" name="pass" placeholder="Password" class="form-control" value='@registroForm("senha").value'>
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
             </p>
             <div>
-                <button class="btn btn-primary"  type="submit">Registrar</button>
-                <a class="btn btn-info" style="float:right;" href="/login"> Login</a>
+                <button class="btn btn-primary" style="float:center;" type="submit" >Registrar</button>
             </div>
         }
     </div>
