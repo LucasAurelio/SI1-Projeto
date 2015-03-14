@@ -1,57 +1,60 @@
 @(message: String)(loginForm: Form[User])(registroForm: Form[User])
 
 @main("Portal dos leites") {
-    <header class="jumbotron">
-        <div class="container" align="center">
-            <h2>Bem vindo a aplicação web: Portal dos leites!</h2>
+
+    <header class="jumbotron" id="mainTitle">
+        <div class="text-center" align="center">
+            <h2 class="brand">Portal do leite</h2>
         </div>
     </header>
 
-    <div class="col-sm-4 col-sm-offset-4">
-        @if(flash.contains("fail")) {
-            <p class="bg-danger" style="">
-            @flash.get("fail")
-            </p>
-        }
+    <div class="container" id="mainPanel">
+        <div id="loginForm">
+            @if(flash.contains("fail")) {
+                <p class="bg-danger" style="">
+                @flash.get("fail")
+                </p>
+            }
 
-        @helper.form(routes.Application.authenticate) {
-            <h1 class="text-center">LogIn</h1>
-            <p>
-                <input type="email" name="email" placeholder="Email" value='@loginForm("email").value' class="form-control" required>
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="Password" class="form-control" required>
-            </p>
-            <div>
-                <button class="btn btn-primary" style="float:center;" type="submit">Login</button>
-            </div>
-        }
-    </div>
+            <h2 class="text-center" id="textOnImage">Log in</h2>
+            @helper.form(routes.Application.authenticate) {
+                <p>
+                    <input type="email" name="email" placeholder="Email" value='@loginForm("email").value' class="form-control" required>
+                </p>
+                <p>
+                    <input type="password" name="password" placeholder="Password" class="form-control" required>
+                </p>
+                <div id="button">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+            }
+        </div>
 
-    <div class="col-sm-4 col-sm-offset-4">
-        @if(flash.contains("fail")) {
-            <p class="bg-danger" style="">
-            @flash.get("fail")
-            </p>
-        }
+        <div id="registerForm">
+            @if(flash.contains("fail")) {
+                <p class="bg-danger" style="">
+                @flash.get("fail")
+                </p>
+            }
 
-        @helper.form(routes.Application.registrar) {
-            <h1 class="text-center">Registrar</h1>
+            @helper.form(routes.Application.registrar) {
+                <h2 class="text-center" id="textOnImage">Cadastre-se!</h2>
 
-            <p>
-                <input type="text" name="nome" placeholder="Nome" value='@registroForm("nome").value'
-                class="form-control" required>
-            </p>
-            <p>
-                <input type="email" name="email" placeholder="Email" value='@registroForm("email").value'
-                class="form-control" required>
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="Password" class="form-control" required>
-            </p>
-            <div>
-                <button class="btn btn-primary" style="float:center;" type="submit" >Registrar</button>
-            </div>
-        }
+                <p>
+                    <input type="text" name="nome" placeholder="Nome" value='@registroForm("nome").value'
+                    class="form-control" required>
+                </p>
+                <p>
+                    <input type="email" name="email" placeholder="Email" value='@registroForm("email").value'
+                    class="form-control" required>
+                </p>
+                <p>
+                    <input type="password" name="password" placeholder="Password" class="form-control" required>
+                </p>
+                <div id="button">
+                    <button class="btn btn-primary" type="submit" >Registrar</button>
+                </div>
+            }
+        </div>
     </div>
 }
