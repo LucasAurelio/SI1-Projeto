@@ -7,6 +7,7 @@
     <title>Portal do Leite</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=divice-width, initial-scale=1.0">
+    <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
   </head>
 
   <body id="corpo" class="center clearfix">
@@ -15,7 +16,7 @@
       <h1 class="texto"><a href="forum.html" title="Portal do leite"><span></span></a></h1>
       <nav>
         <ul>
-          <li><a href="#">Labs</a></li>
+          <li><a href="#" onclick="javascrpit:faq()">Labs</a></li>
           <li><a href="#">Minitestes</a></li>
           <li><a href="#">Projeto</a></li>
           <li><a href="#">Links</a></li>
@@ -27,7 +28,7 @@
     <section class="chamada">
       <h2 class="texto"><span>Bem vindo ao </span>PORTAL DO LEITE<span> @session().get("user")</span></h2>
     </section>
-    <section class="showing">
+    <section id="showing">
 
     </section>
     <footer>
