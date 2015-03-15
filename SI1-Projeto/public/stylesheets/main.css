@@ -28,8 +28,11 @@
     color: #f5f5f5;
 }
 
-#mainPanel{
+body {
     background-image: url("http://cdn.superbwallpapers.com/wallpapers/vector/splashing-milk-14187-1680x1050.jpg");
+}
+
+#mainPanel{
     margin-top: -30px;
     width: 1366px;
     padding: 120px 250px 215px 250px;
