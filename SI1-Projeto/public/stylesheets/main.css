@@ -5,9 +5,11 @@
 #mainTitle {
     padding-top: 8px;
     padding-bottom: 8px;
-    color: #f5f5f5;
-    /*background-color: #080808;*/
     border-bottom: thick solid;
+    background-color: #ffffff;
+    opacity: 0.6;
+    font-weight: bold;
+    color: #000000;
 }
 /*
 #textOnImage{
