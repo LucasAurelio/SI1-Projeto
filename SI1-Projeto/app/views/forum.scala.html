@@ -1,51 +1,40 @@
 @(message: String)
 
 @main("Meu Forum") {
+
   <head>
     <meta charset="UTF-8">
-    <title>Portal dos leites</title>
-
+    <title>Portal do Leite</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=divice-width, initial-scale=1.0">
   </head>
 
-  <body>
-    <div class="page-header">
-      <div class="container" align="center"><h2>Seja bem vindo a Aplicação web: Portal dos leites, @session().get("user")</h2></div>
-    </div>
+  <body id="corpo" class="center clearfix">
 
-    <div id="sidebar" class="panel panel-default">
-      <div class="panel panel-heading"><h3>Perfil</h3></div>
-      <div class="panel panel-heading"><h3>Labs</h3></div>
-      <div class="panel panel-heading"><h3>Minitestes</h3></div>
-      <div class="panel panel-heading"><h3>Projeto</h3></div>
-      <div class="panel panel-heading"><h3>Links</h3></div>
-      <div class="panel panel-heading"><h3>FAQ</h3></div>
-      <div class="panel panel-heading"><h3>Créditos</h3></div>
-    </div>
+    <header id="cabecalho">
+      <h1 class="texto"><a href="forum.html" title="Portal do leite"><span></span></a></h1>
+      <nav>
+        <ul>
+          <li><a href="#">Labs</a></li>
+          <li><a href="#">Minitestes</a></li>
+          <li><a href="#">Projeto</a></li>
+          <li><a href="#">Links</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <div id="painel" class="panel panel-default">
-      <div class="panel-heading">
-        <h3 align="center">conteúdo</h3>
-      </div>
-      <div class="panel-body" align="center"></div>
+    <section class="chamada">
+      <h2 class="texto"><span>Bem vindo ao </span>PORTAL DO LEITE<span> @session().get("user")</span></h2>
+    </section>
+    <section class="container">
 
-    </div>
-
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-    <div class="page-header"></div>
-
-    <a href="/logout" class="btn btn-primary pull-left"> Log Out</a>
+    </section>
+    <footer>
+      <small class="copyright">
+        <p>Copyright © 2015 - Todos os Direitos Reservados a Erick Santana e Lucas Aurelio <a id="logout" href="/logout" class="btn pull-right"> Log Out</a></p>
+      </small>
+    </footer>
 
   </body>
 }

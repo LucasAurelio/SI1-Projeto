@@ -11,11 +11,7 @@
     font-weight: bold;
     color: #000000;
 }
-/*
-#textOnImage{
-    color: #f5f5f5;
-}
-*/
+
 #button{
     text-align: center;
 }
@@ -44,32 +40,132 @@ body {
 /*
     HOME PAGE
 */
-#sidebar {
-    float: left;
-    background: #eeeeee;
-    width: 20%;
-    height: 707px;
-    margin-bottom: 20px;
-    padding: 10px;
+#corpo{
+    background-color: #f2f2f2;
+    color:#868686;
+    font-family: "Open Sans", Helvetica, sans-serif, arial;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 22px;
+    text-align: left;
+    text-shadow:0.5px 0.5px 0px #fff;
+}
+
+.center{
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+img, picture, video, embed {
+    max-width: 100%;
+}
+
+.texto{
+    color:#FE9380;
+    font-size: 60px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 60px;
+}
+
+#logout{
+    float: right;
+    color: #ffffff;
+    background-color:#FE9380;
+    text-shadow:0px 0px 0px;
+}
+
+p{
+    font-weight: 300;
+    letter-spacing: -1px;
+}
+
+#cabecalho{
+    border-bottom: 1px solid #E0E0E0;
+    height:150px;
+    width:1200px;
+}
+
+#cabecalho h1 a{
+    background:url(http://th01.deviantart.net/fs70/200H/f/2013/051/c/9/milk_and_cookie_by_rocarballaeditions-d5vm1dn.png) no-repeat;
+    display:block;
+    float:left;
+    height:139px;
+    text-indent: -9999;
+    width:302px;
+}
+
+nav{
+    float:right;
+    margin-top:116px;
+    text-align:right;
+    width:490px;
+}
+nav ul{
+    list-style-type:none;
+}
+nav li {
+    display: inline;
+}
+nav ul li a{
+    margin-right: 30px;
+}
+nav ul li:nth-child(5) a{
+    margin-right:0px;
+}
+nav a:link, nav a:visited{
+    color:#999;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: 26px;
+    display:inline-block;
+}
+nav a:hover{
+    color:#FE9380;
+}
+
+.chamada{
+    text-align:center;
+}
+h2 span{
+    font-size: 60px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: 60px;
+}
+
+.container{
+    background-color:snow;
+    height: 1000px;
+    padding:30px;
+    max-width:1200px;
+    margin: 15px;
+    border:3px #E0E0E0 solid;
+    overflow: auto;
+    position: relative;
 
     -moz-border-radius:7px;
     -webkit-border-radius:7px;
     border-radius:7px;
 }
-
-.panel {
-    margin: 2px;
-    height: 80px;
-    text-align: center;
-
-}
-
-#painel {
-    float: right;
-    position: relative;
-    width: 78%;
-    height: 707px;
-    margin-bottom: 20px;
-    padding: 10px;
-
+footer{
+    clear:both;
+    height: 50px;
+    padding: 10px 0px;
+    width:1150px;
+    margin-left: 20px;
 }
