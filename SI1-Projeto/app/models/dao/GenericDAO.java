@@ -27,8 +27,8 @@ public class GenericDAO {
         return JPA.em().find(clazz, id);
     }
 
-    public <T> List<T> findAllByClassName(String className) {
-        String hql = "FROM " + className;
+    public <T> List<T> findAllByClass(Class clazz) {
+        String hql = "FROM " + clazz.getName();
         Query hqlQuery = JPA.em().createQuery(hql);
         return hqlQuery.getResultList();
     }
