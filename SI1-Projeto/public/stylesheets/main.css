@@ -152,15 +152,31 @@ h2 span{
     background-color:snow;
     height: 1000px;
     width: 70%;
-    padding:10px;
+    padding:50px 10px 10px 10px;
     margin-left: -5px;
     max-width:1200px;
     border:3px #E0E0E0 solid;
     float: left;
-
+    overflow: auto;
+    text-align: center;
     -moz-border-radius:7px;
     -webkit-border-radius:7px;
     border-radius:7px;
+}
+
+#showing > b {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    color: #31708f;
+}
+
+#showing > p {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    color: #000000;
+}
+
+#showing > h4 {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    color: #000000;
 }
 
 #showing2{
