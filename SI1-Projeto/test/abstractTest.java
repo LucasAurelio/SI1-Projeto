@@ -1,6 +1,3 @@
-package test;
-
-import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Before;
 import play.GlobalSettings;
@@ -10,7 +7,9 @@ import play.test.FakeApplication;
 import play.test.Helpers;
 import scala.Option;
 
-public abstract class AbstractTest {
+import javax.persistence.EntityManager;
+
+public abstract class abstractTest {
 
     public EntityManager em;
 
@@ -30,4 +29,5 @@ public abstract class AbstractTest {
         JPA.bindForCurrentThread(null);
         em.close();
     }
+
 }
