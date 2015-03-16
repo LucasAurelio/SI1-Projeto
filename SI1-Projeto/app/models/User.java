@@ -2,7 +2,7 @@ package models;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "User")
 public class User {
     @Id
     @GeneratedValue

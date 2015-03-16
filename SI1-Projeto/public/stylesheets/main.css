@@ -151,12 +151,25 @@ h2 span{
 #showing{
     background-color:snow;
     height: 1000px;
-    padding:30px;
+    width: 70%;
+    padding:10px;
+    margin-left: -5px;
     max-width:1200px;
-    margin: 15px;
     border:3px #E0E0E0 solid;
-    overflow: auto;
-    position: relative;
+    float: left;
+
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
+}
+
+#showing2{
+    float: right;
+    width: 30%;
+    height: 1000px;
+    border:3px #E0E0E0 solid;
+    background-color:snow;
+    margin-right: -5px;
 
     -moz-border-radius:7px;
     -webkit-border-radius:7px;
