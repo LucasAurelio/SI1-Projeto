@@ -1,22 +1,26 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity(name="Dica")
-public class Dica {
+@Entity(name="MetaDica")
+public class MetaDica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String titulo, conteudo;
     private int nota;
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn
+    private List<MetaDica> dicas;
 
-    public Dica(){}
+    public MetaDica(){
+        dicas = new ArrayList<>();
+    }
 
-    public Dica(String titulo, String conteudo, int nota){
+    public MetaDica(String titulo, String conteudo, int nota){
         setTitulo(titulo);
         setConteudo(conteudo);
         setNota(nota);
@@ -45,4 +49,13 @@ public class Dica {
     public void setNota(int nota) {
         this.nota = nota;
     }
+
+    public void addDicas(MetaDica dica){
+        dicas.add(dica);
+    }
+
+    public List<MetaDica> getDicas(){
+        return dicas;
+    }
 }
+
