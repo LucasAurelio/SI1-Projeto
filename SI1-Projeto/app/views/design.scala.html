@@ -31,9 +31,18 @@
       <h2 class="texto">Design</h2>
     </section>
     <section id="showing">
-    @for(tip <- tips){
-      <p id="teste">@tip.getConteudo</p>
-    }
+      <div id="info" class="panel panel-default">
+        <div class="panel panel-heading"><h1>Informações gerais</h1></div>
+        <div class="panel-body">
+          <p>a disciplina de SI1 consiste ao todo de 3 labs, sendo o primeiro deles o mais fácil de todos! O 1° lab exige conhecimentos relativamente simples, como javascript
+            , css e html, para obter dicas sobre eles basta ir na aba <a href="/ferramentas">Ferramentas</a>.
+            O 2° lab por outro lado exige mais conhecimentos em outras ferramentas, como o play framework e o intellij, além de um pouco de conhecimento sobre <a href="/padroesDeProjeto">Padrões de projeto</a>.
+            O último porém não menos importante é o 3° lab, o qual faz uso de todos os conhecimentos já vistos e também da ferramenta <a href="/heroku">Heroku</a>.</p>
+        </div>
+        <br>
+        <br>
+        <a id="dica" href="" class="btn pull-right">+DICA</a>
+      </div>
     </section>
     <subsection id="showing2">
     </subsection>

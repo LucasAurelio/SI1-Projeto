@@ -55,14 +55,6 @@ public class Tema {
     }
 
     public List<MetaDica> getMetadicas(){
-        if(metadicas.isEmpty()){
-            metadicas.add(new MetaDica("teste","testando"));
-            metadicas.add(new MetaDica("teste","PEGOU, CARAI!!"));
-            metadicas.add(new MetaDica("teste","SIM ERICK, PODE CHORAR"));
-            metadicas.add(new MetaDica("teste","SIM ERICK, TB TO EMOCIONADO"));
-            metadicas.add(new MetaDica("teste","PQP"));
-            metadicas.add(new MetaDica("teste","agora so falta estilizar....e fazer o resto das coisas(que é muito kkkk)"));
-        }
         return metadicas;
     }
 
