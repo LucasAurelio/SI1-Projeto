@@ -1,4 +1,4 @@
-@(message: String)(temas: List[Tema])
+@(message: String)(tips: List[MetaDica])
 
 @main("Meu Lab") {
 
@@ -32,6 +32,9 @@
     </section>
     <section id="showing">
       <div id="info" class="container"></div>
+      @for(tip <- tips){
+        <p>@tip.getConteudo</p>
+      }
     </section>
     <subsection id="showing2">
 

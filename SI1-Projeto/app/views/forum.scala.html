@@ -1,4 +1,4 @@
-@(message: String)(subjects: List[Tema]))
+@(message: String)
 
 @main("Meu Forum") {
 
@@ -31,11 +31,6 @@
       <h2 class="texto"><span>Bem vindo ao </span>PORTAL DO LEITE<span> @session().get("user")</span></h2>
     </section>
     <section id="showing">
-      @for (subject <- subjects){
-          @if subject.{
-
-          }
-      }
     </section>
     <subsection id="showing2">
     </subsection>

@@ -1,4 +1,4 @@
-@(message: String)(temas: List[Tema])
+@(message: String)(tips: List[MetaDica])
 
 @main("Meu Padrao") {
 
@@ -31,6 +31,9 @@
     <h2 class="texto">Padrões de projeto</h2>
   </section>
   <section id="showing">
+  @for(tip <- tips){
+    <p>@tip.getConteudo</p>
+  }
   </section>
   <subsection id="showing2">
 

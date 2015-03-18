@@ -46,7 +46,7 @@ public class Global extends GlobalSettings {
                 dao.merge(design);
 
                 dao.flush();
-            }
+            };
         });
     }
 }

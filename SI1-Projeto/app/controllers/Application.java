@@ -5,31 +5,34 @@ import models.Tema;
 import models.User;
 import models.dao.GenericDAO;
 import play.data.DynamicForm;
+import views.html.*;
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static play.data.Form.form;
 
 public class Application extends Controller {
 
-    private static GenericDAO dao = new GenericDAO();
+    private static final GenericDAO dao = new GenericDAO();
     static Form<User> registroForm = form(User.class).bindFromRequest();
     static Form<User> loginForm = form(User.class).bindFromRequest();
-    private static List<Tema> temas = dao.findAllByClassName(Tema.class.getName());
+    private static List<Tema> temas = null;
 
+    @Transactional
     public static Result index() {
+        temas = dao.findAllByClass(Tema.class);
         return ok(index.render("Meu Forum", loginForm, registroForm));
     }
 
     @Transactional
     public static Result show(){
         if (session().get("user") != null){
-            return ok(forum.render("Meu Forum",temas));
+            return ok(forum.render("Meu Forum"));
         }
         return redirect(routes.Application.index());
     }
@@ -85,7 +88,7 @@ public class Application extends Controller {
             User user = (User) dao.findByAttributeName("User", "email", u.getEmail()).get(0);
             session().clear();
             session("user", user.getNome());
-            return ok(forum.render("Meu Forum",temas));
+            return ok(forum.render("Meu Forum"));
         }
     }
 
@@ -104,36 +107,93 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showLabs() {
-        return ok(labs.render("Labs",temas));
+
+        List<MetaDica> tips = new ArrayList<>();
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema tema: temas){
+            if (tema.getNome().equals("Laboratórios")){
+                tips = tema.getMetadicas();
+            }
+        }
+        return ok(labs.render("Meu Lab",tips));
     }
 
     @Transactional
     public static Result showMinitestes() {
-        return ok(minitestes.render("Minitestes",temas));
+        List<MetaDica> tips = new ArrayList<>();
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema tema: temas){
+            if (tema.getNome().equals("Minitestes")){
+                tips = tema.getMetadicas();
+            }
+        }
+        return ok(minitestes.render("Meu Miniteste",tips));
     }
 
     @Transactional
     public static Result showProjeto() {
-        return ok(projeto.render("Projeto",temas));
+        List<MetaDica> tips = new ArrayList<>();
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema tema: temas){
+            if (tema.getNome().equals("Projeto")){
+                tips = tema.getMetadicas();
+            }
+        }
+        return ok(projeto.render("Meu Projeto",tips));
     }
 
     @Transactional
     public static Result showHeroku() {
-        return ok(heroku.render("Heroku",temas));
+        List<MetaDica> tips = new ArrayList<>();
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema tema: temas){
+            if (tema.getNome().equals("Heroku")){
+                tips = tema.getMetadicas();
+            }
+        }
+        return ok( heroku.render("Meu Heroku",tips));
     }
 
     @Transactional
     public static Result showPadroesDeProjeto() {
-        return ok(padroesDeProjeto.render("Padroes",temas));
+        List<MetaDica> tips = new ArrayList<>();
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema tema: temas){
+            if (tema.getNome().equals("PadroesDeProjeto")){
+                tips = tema.getMetadicas();
+            }
+        }
+        return ok(padroesDeProjeto.render("Meu Padrao",tips));
     }
 
     @Transactional
     public static Result showFerramentas() {
-        return ok(ferramentas.render("Ferramentas",temas));
+        List<MetaDica> tips = new ArrayList<>();
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema tema: temas){
+            if (tema.getNome().equals("Ferramentas")){
+                tips = tema.getMetadicas();
+            }
+        }
+        return ok(ferramentas.render("Minha Ferramenta",tips));
     }
 
     @Transactional
     public static Result showDesign() {
-        return ok(design.render("Design",temas));
+        List<MetaDica> tips = new ArrayList<>();
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema tema: temas){
+            if (tema.getNome().equals("Design")){
+                tips = tema.getMetadicas();
+            }
+        }
+        return ok(design.render("Meu Design",tips));
     }
 }

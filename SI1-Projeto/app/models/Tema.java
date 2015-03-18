@@ -4,9 +4,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Erick on 17/03/2015.
- */
 @Entity(name = "Tema")
 public class Tema {
     @Id
@@ -58,6 +55,14 @@ public class Tema {
     }
 
     public List<MetaDica> getMetadicas(){
+        if(metadicas.isEmpty()){
+            metadicas.add(new MetaDica("teste","tentando"));
+            metadicas.add(new MetaDica("teste","tentando"));
+            metadicas.add(new MetaDica("teste","tentando"));
+            metadicas.add(new MetaDica("teste","tentando"));
+            metadicas.add(new MetaDica("teste","tentando"));
+            metadicas.add(new MetaDica("teste","tentando"));
+        }
         return metadicas;
     }
 
