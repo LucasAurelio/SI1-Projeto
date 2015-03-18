@@ -1,5 +1,7 @@
 package controllers;
 
+import models.MetaDica;
+import models.Tema;
 import models.User;
 import models.dao.GenericDAO;
 import play.data.DynamicForm;
@@ -115,7 +117,22 @@ public class Application extends Controller {
     }
 
     @Transactional
-    public static Result showLinks() {
-        return ok(links.render("Links"));
+    public static Result showHeroku() {
+        return ok(heroku.render("Heroku"));
+    }
+
+    @Transactional
+    public static Result showPadroesDeProjeto() {
+        return ok(padroesDeProjeto.render("Padroes"));
+    }
+
+    @Transactional
+    public static Result showFerramentas() {
+        return ok(ferramentas.render("Ferramentas"));
+    }
+
+    @Transactional
+    public static Result showDesign() {
+        return ok(design.render("Design"));
     }
 }

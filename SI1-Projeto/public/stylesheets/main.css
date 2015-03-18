@@ -28,7 +28,11 @@
 }
 
 body {
-    background: url(http://cdn.superbwallpapers.com/wallpapers/vector/splashing-milk-14187-1680x1050.jpg)no-repeat fixed;
+    background: url(http://cdn.superbwallpapers.com/wallpapers/vector/splashing-milk-14187-1680x1050.jpg)no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 #mainPanel{
@@ -48,7 +52,6 @@ body {
     font-weight: 300;
     line-height: 22px;
     text-align: left;
-    text-shadow: 0.5px 0.5px 0px #fff;
 }
 
 .center{
@@ -85,7 +88,6 @@ img, picture, video, embed {
     float: right;
     color: #ffffff;
     background-color:#FE9380;
-    text-shadow:0px 0px 0px;
 }
 
 p{
@@ -96,7 +98,7 @@ p{
 #cabecalho{
     border-bottom: 1px solid #E0E0E0;
     height:150px;
-    width:80%px;
+    width:100%;
 }
 
 #cabecalho h1 a{
@@ -112,7 +114,7 @@ nav{
     float:right;
     margin-top:116px;
     text-align:right;
-    width:490px;
+    width:1000px;
 }
 nav ul{
     list-style-type:none;
@@ -122,9 +124,6 @@ nav li {
 }
 nav ul li a{
     margin-right: 30px;
-}
-nav ul li:nth-child(5) a{
-    margin-right:0px;
 }
 nav a:link, nav a:visited{
     color:#999;
@@ -162,6 +161,10 @@ h2 span{
     -moz-border-radius:7px;
     -webkit-border-radius:7px;
     border-radius:7px;
+}
+
+#info{
+
 }
 
 #showing > b {

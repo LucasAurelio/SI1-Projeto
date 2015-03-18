@@ -14,23 +14,14 @@ public class MetaDica {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     private List<MetaDica> dicas;
-    private String tema;
-    /*
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<Integer> notas;
-    */
+
     public MetaDica() {
         dicas = new ArrayList<>();
-        /*
-        notas = new ArrayList<>();
-        */
     }
 
     public MetaDica(String titulo, String conteudo) {
         setTitulo(titulo);
         setConteudo(conteudo);
-        tema = "";
     }
 
     public String getTitulo() {
@@ -56,28 +47,5 @@ public class MetaDica {
     public List<MetaDica> getDicas() {
         return dicas;
     }
-
-    public String getTema() {
-        return tema;
-    }
-
-    public void setTema(String tema) {
-        this.tema = tema;
-    }
-
-    /*
-    public void addNota(int nota){
-        notas.add(nota);
-    }
-
-    public double getNota(){
-        double media = 0;
-        for(Integer nota: notas){
-            media += nota;
-        }
-
-        return media/notas.size();
-    }
-    */
 }
 

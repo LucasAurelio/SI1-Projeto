@@ -33,6 +33,12 @@ public class GenericDAO {
         return hqlQuery.getResultList();
     }
 
+    public <T> List<T> findAllByClassName(String className) {
+        String hql = "FROM " + className;
+        Query hqlQuery = JPA.em().createQuery(hql);
+        return hqlQuery.getResultList();
+    }
+
     public <T> void removeById(Class<T> classe, Long id) {
         JPA.em().remove(findByEntityId(classe, id));
     }

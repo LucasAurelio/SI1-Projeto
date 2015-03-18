@@ -3,17 +3,20 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index()
-GET         /login               controllers.Application.show()
-POST        /login               controllers.Application.authenticate()
-GET         /logout              controllers.Application.logout()
-GET         /registrar           controllers.Application.show()
-POST        /registrar           controllers.Application.registrar()
-GET         /labs                controllers.Application.showLabs()
-GET         /minitestes          controllers.Application.showMinitestes()
-GET         /projeto             controllers.Application.showProjeto()
-GET         /links               controllers.Application.showLinks()
-GET         /forum               controllers.Application.show()
+GET         /                        controllers.Application.index()
+GET         /login                   controllers.Application.show()
+POST        /login                   controllers.Application.authenticate()
+GET         /logout                  controllers.Application.logout()
+GET         /registrar               controllers.Application.show()
+POST        /registrar               controllers.Application.registrar()
+GET         /labs                    controllers.Application.showLabs()
+GET         /minitestes              controllers.Application.showMinitestes()
+GET         /projeto                 controllers.Application.showProjeto()
+GET         /heroku                  controllers.Application.showHeroku()
+GET         /padroesDeProjeto        controllers.Application.showPadroesDeProjeto()
+GET         /ferramentas             controllers.Application.showFerramentas()
+GET         /design                  controllers.Application.showDesign()
+GET         /forum                   controllers.Application.show()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file            controllers.Assets.at(path="/public", file)
