@@ -20,6 +20,7 @@ public class Application extends Controller {
     private static GenericDAO dao = new GenericDAO();
     static Form<User> registroForm = form(User.class).bindFromRequest();
     static Form<User> loginForm = form(User.class).bindFromRequest();
+    private static List<Tema> temas = dao.findAllByClassName(Tema.class.getName());
 
     public static Result index() {
         return ok(index.render("Meu Forum", loginForm, registroForm));
@@ -28,7 +29,7 @@ public class Application extends Controller {
     @Transactional
     public static Result show(){
         if (session().get("user") != null){
-            return ok(forum.render("Meu Forum"));
+            return ok(forum.render("Meu Forum",temas));
         }
         return redirect(routes.Application.index());
     }
@@ -84,7 +85,7 @@ public class Application extends Controller {
             User user = (User) dao.findByAttributeName("User", "email", u.getEmail()).get(0);
             session().clear();
             session("user", user.getNome());
-            return ok(forum.render("Meu Forum"));
+            return ok(forum.render("Meu Forum",temas));
         }
     }
 
@@ -103,36 +104,36 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showLabs() {
-        return ok(labs.render("Labs"));
+        return ok(labs.render("Labs",temas));
     }
 
     @Transactional
     public static Result showMinitestes() {
-        return ok(minitestes.render("Minitestes"));
+        return ok(minitestes.render("Minitestes",temas));
     }
 
     @Transactional
     public static Result showProjeto() {
-        return ok(projeto.render("Projeto"));
+        return ok(projeto.render("Projeto",temas));
     }
 
     @Transactional
     public static Result showHeroku() {
-        return ok(heroku.render("Heroku"));
+        return ok(heroku.render("Heroku",temas));
     }
 
     @Transactional
     public static Result showPadroesDeProjeto() {
-        return ok(padroesDeProjeto.render("Padroes"));
+        return ok(padroesDeProjeto.render("Padroes",temas));
     }
 
     @Transactional
     public static Result showFerramentas() {
-        return ok(ferramentas.render("Ferramentas"));
+        return ok(ferramentas.render("Ferramentas",temas));
     }
 
     @Transactional
     public static Result showDesign() {
-        return ok(design.render("Design"));
+        return ok(design.render("Design",temas));
     }
 }
