@@ -17,15 +17,26 @@
 }
 
 #loginForm{
-    float: left;
+    color:#FE9380;
     padding-top: 20px;
-    color: #f5f5f5;
+    width: 50%;
+    margin-left: 28%;
+    height: 300px;
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
 }
 
 #registerForm{
-    float: right;
-    color: #f5f5f5;
+    color:#FE9380;
+    width: 50%;
+    margin-left: 28%;
+    height: 300px;
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
 }
+
 
 body {
     background: url(http://cdn.superbwallpapers.com/wallpapers/vector/splashing-milk-14187-1680x1050.jpg)no-repeat center center fixed;
@@ -53,6 +64,12 @@ body {
     line-height: 22px;
     text-align: left;
 }
+
+
+#corpo2{
+    width: 25%;
+}
+
 
 .center{
     margin: 0 auto;

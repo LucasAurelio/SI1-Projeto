@@ -2,14 +2,19 @@
 
 @main("Portal do leite") {
 
-    <header id="mainTitle">
-        <div class="text-center" align="center">
-            <h2 class="brand">Portal do leite</h2>
-        </div>
-    </header>
 
-    <div class="container" id="mainPanel">
-        <div id="loginForm">
+
+    <section class="chamada">
+        <h2 class="texto">PORTAL DO LEITE</h2>
+    </section>
+
+    <body id="corpo2" class="center clearfix">
+        <div class="page-header">
+        </div>
+
+        <br>
+
+        <div id="loginForm" align="center">
             @if(flash.contains("fail")) {
                 <p class="bg-danger" style="">
                 @flash.get("fail")
@@ -28,9 +33,10 @@
                     <button class="btn btn-primary" type="submit">Login</button>
                 </div>
             }
+
         </div>
 
-        <div id="registerForm">
+        <div id="registerForm" align="center">
             @if(flash.contains("fail")) {
                 <p class="bg-danger" style="">
                 @flash.get("fail")
@@ -56,5 +62,14 @@
                 </div>
             }
         </div>
-    </div>
+        <footer>
+            <small class="copyright" align="center">
+                <p>Copyright © 2015 - Todos os Direitos Reservados a Erick Santana e Lucas Aurelio</p>
+            </small>
+        </footer>
+
+    </body>
+
+
+
 }
