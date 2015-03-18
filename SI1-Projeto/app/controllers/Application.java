@@ -32,7 +32,15 @@ public class Application extends Controller {
     @Transactional
     public static Result show(){
         if (session().get("user") != null){
-            return ok(forum.render("Meu Forum"));
+            List<MetaDica> tips = new ArrayList<>();
+
+            temas = dao.findAllByClass(Tema.class);
+            for (Tema tema: temas){
+                if (tema.getNome().equals("Geral")){
+                    tips = tema.getMetadicas();
+                }
+            }
+            return ok(forum.render("Meu Forum",tips));
         }
         return redirect(routes.Application.index());
     }
@@ -88,7 +96,15 @@ public class Application extends Controller {
             User user = (User) dao.findByAttributeName("User", "email", u.getEmail()).get(0);
             session().clear();
             session("user", user.getNome());
-            return ok(forum.render("Meu Forum"));
+            List<MetaDica> tips = new ArrayList<>();
+
+            temas = dao.findAllByClass(Tema.class);
+            for (Tema tema: temas){
+                if (tema.getNome().equals("Geral")){
+                    tips = tema.getMetadicas();
+                }
+            }
+            return ok(forum.render("Meu Forum",tips));
         }
     }
 
@@ -195,5 +211,47 @@ public class Application extends Controller {
             }
         }
         return ok(design.render("Meu Design",tips));
+    }
+
+    @Transactional
+    public static Result newMainTip(){
+        DynamicForm form = Form.form().bindFromRequest();
+
+        String autor = session().get("user");
+        String titulo = form.get("titulo");
+        String descricao = form.get("descricao");
+        String tema = form.get("topico");
+
+        MetaDica newMainTip = new MetaDica(autor,titulo,descricao);
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema theme: temas){
+            if (theme.getNome().equals(tema)){
+                theme.addMetaDica(newMainTip);
+            }
+        }
+
+        return verificaView(tema);
+    }
+
+    private static Result verificaView(String tema){
+        if(tema.equals("Geral")){
+            return redirect(routes.Application.show());
+        }else if(tema.equals("Laboratórios")){
+            return redirect(routes.Application.showLabs());
+        }else if(tema.equals("Minitestes")) {
+            return redirect(routes.Application.showMinitestes());
+        }else if(tema.equals("Projeto")) {
+            return redirect(routes.Application.showProjeto());
+        }else if(tema.equals("Heroku")) {
+            return redirect(routes.Application.showHeroku());
+        }else if(tema.equals("PadroesDeProjeto")) {
+            return redirect(routes.Application.showPadroesDeProjeto());
+        }else if(tema.equals("Ferramentas")) {
+            return redirect(routes.Application.showFerramentas());
+        }else if(tema.equals("Design")) {
+            return redirect(routes.Application.showDesign());
+        }
+        return redirect(routes.Application.show());
     }
 }
