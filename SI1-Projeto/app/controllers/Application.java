@@ -7,8 +7,7 @@ import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.forum;
-import views.html.index;
+import views.html.*;
 
 import java.util.List;
 
@@ -98,5 +97,25 @@ public class Application extends Controller {
             }
         }
         return true;
+    }
+
+    @Transactional
+    public static Result showLabs() {
+        return ok(labs.render("Labs"));
+    }
+
+    @Transactional
+    public static Result showMinitestes() {
+        return ok(minitestes.render("Minitestes"));
+    }
+
+    @Transactional
+    public static Result showProjeto() {
+        return ok(projeto.render("Projeto"));
+    }
+
+    @Transactional
+    public static Result showLinks() {
+        return ok(links.render("Links"));
     }
 }

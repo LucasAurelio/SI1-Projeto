@@ -28,7 +28,7 @@
 }
 
 body {
-    background-image: url("http://cdn.superbwallpapers.com/wallpapers/vector/splashing-milk-14187-1680x1050.jpg");
+    background: url(http://cdn.superbwallpapers.com/wallpapers/vector/splashing-milk-14187-1680x1050.jpg)no-repeat fixed;
 }
 
 #mainPanel{
