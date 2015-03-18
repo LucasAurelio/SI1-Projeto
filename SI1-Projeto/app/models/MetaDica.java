@@ -10,7 +10,7 @@ public class MetaDica {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String titulo, conteudo;
+    private String titulo, conteudo, autor;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     private List<MetaDica> dicas;
@@ -19,7 +19,8 @@ public class MetaDica {
         dicas = new ArrayList<>();
     }
 
-    public MetaDica(String titulo, String conteudo) {
+    public MetaDica(String autor, String titulo, String conteudo) {
+        setAutor(autor);
         setTitulo(titulo);
         setConteudo(conteudo);
     }
@@ -46,6 +47,14 @@ public class MetaDica {
 
     public List<MetaDica> getDicas() {
         return dicas;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 }
 
