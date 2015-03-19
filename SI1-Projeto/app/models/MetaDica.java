@@ -5,56 +5,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name="MetaDica")
-public class MetaDica {
+public class MetaDica extends Dica {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    private String titulo, conteudo, autor;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<MetaDica> dicas;
+    private List<MetaDica> metaDicas;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Dica> dicas;
 
     public MetaDica() {
+        super();
         dicas = new ArrayList<>();
     }
 
     public MetaDica(String autor, String titulo, String conteudo) {
-        setAutor(autor);
-        setTitulo(titulo);
-        setConteudo(conteudo);
+        super(autor, titulo, conteudo);
     }
 
-    public String getTitulo() {
-        return titulo;
+    public void addMetaDicas(MetaDica dica) { metaDicas.add(dica); }
+
+    public List<MetaDica> getMetaDicas() {
+        return metaDicas;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getConteudo() {
-        return conteudo;
-    }
-
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
-    }
-
-    public void addDicas(MetaDica dica) {
-        dicas.add(dica);
-    }
-
-    public List<MetaDica> getDicas() {
+    public List<Dica> getDicas() {
         return dicas;
     }
 
-    public String getAutor() {
-        return autor;
-    }
+    public void addDicas(Dica dica) { dicas.add(dica); }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
 }
 

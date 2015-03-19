@@ -1,8 +1,8 @@
 function newTip(){
     document.getElementById('newTip').innerHTML = "<form method='post' action='/newMainTip'>" +
-    "<input name='titulo' type='text' placeholder='Título' required/>" +
-    "<input name='descricao' type='text' placeholder='Digite aqui sua dica!' required/>" +
-    "<select name='topico'>" +
+    "<input name='titulo' style='width:30%' type='text' placeholder='Título' required/>" + "<br>" + "<br>" +
+    "<input name='descricao' style='width:30%' type='text' placeholder='Digite aqui sua dica!' required/>" + "<br>" + "<br>" +
+    "<select name='topico' style='width:30%'>" +
     "<option value='Geral'> Tópico </option>" +
     "<option value='Geral'> Geral </option>" +
     "<option value='Laboratórios'> Labs </option>" +
@@ -12,5 +12,7 @@ function newTip(){
     "<option value='PadroesDeProjeto'> Padrões </option>" +
     "<option value='Ferramentas'> Ferramentas </option>" +
     "<option value='Design'> Design </option>" +
-    "<input class='btn' type='submit' value='Adicionar'/>";
+    "</select>" + "<br>" + "<br>" +
+    "<input class='btn' type='submit' value='Adicionar'/>"
+    + "</form>";
 }
