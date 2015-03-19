@@ -1,15 +1,16 @@
 package controllers;
 
+import models.Dica;
 import models.MetaDica;
 import models.Tema;
 import models.User;
 import models.dao.GenericDAO;
 import play.data.DynamicForm;
-import views.html.*;
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,12 +128,12 @@ public class Application extends Controller {
     @Transactional
     public static Result showLabs() {
 
-        List<MetaDica> tips = new ArrayList<>();
+        List<Dica> tips = new ArrayList<>();
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Laboratórios")){
-                tips = tema.getMetadicas();
+                tips = tema.getDicas();
             }
         }
         return ok(labs.render("Meu Lab",tips));
@@ -140,12 +141,12 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showMinitestes() {
-        List<MetaDica> tips = new ArrayList<>();
+        List<Dica> tips = new ArrayList<>();
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Minitestes")){
-                tips = tema.getMetadicas();
+                tips = tema.getDicas();
             }
         }
         return ok(minitestes.render("Meu Miniteste",tips));
@@ -153,12 +154,12 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showProjeto() {
-        List<MetaDica> tips = new ArrayList<>();
+        List<Dica> tips = new ArrayList<>();
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Projeto")){
-                tips = tema.getMetadicas();
+                tips = tema.getDicas();
             }
         }
         return ok(projeto.render("Meu Projeto",tips));
@@ -166,12 +167,12 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showHeroku() {
-        List<MetaDica> tips = new ArrayList<>();
+        List<Dica> tips = new ArrayList<>();
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Heroku")){
-                tips = tema.getMetadicas();
+                tips = tema.getDicas();
             }
         }
         return ok( heroku.render("Meu Heroku",tips));
@@ -179,12 +180,12 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showPadroesDeProjeto() {
-        List<MetaDica> tips = new ArrayList<>();
+        List<Dica> tips = new ArrayList<>();
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("PadroesDeProjeto")){
-                tips = tema.getMetadicas();
+                tips = tema.getDicas();
             }
         }
         return ok(padroesDeProjeto.render("Meu Padrao",tips));
@@ -192,12 +193,12 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showFerramentas() {
-        List<MetaDica> tips = new ArrayList<>();
+        List<Dica> tips = new ArrayList<>();
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Ferramentas")){
-                tips = tema.getMetadicas();
+                tips = tema.getDicas();
             }
         }
         return ok(ferramentas.render("Minha Ferramenta",tips));
@@ -205,12 +206,12 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showDesign() {
-        List<MetaDica> tips = new ArrayList<>();
+        List<Dica> tips = new ArrayList<>();
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Design")){
-                tips = tema.getMetadicas();
+                tips = tema.getDicas();
             }
         }
         return ok(design.render("Meu Design",tips));

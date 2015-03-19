@@ -1,4 +1,4 @@
-@(message: String)(tips: List[MetaDica])
+@(message: String)(tips: List[Dica])
 
 @main("Minitestes") {
 
@@ -32,21 +32,21 @@
     </section>
     <section id="showing">
       <div id="info" class="panel panel-default">
-        <div class="panel panel-heading"><h1>Informações gerais</h1></div>
+        <div class="panel panel-heading"><h1>Informações gerais <a id="dica" class="btn pull-right" onclick="javascrpit:newTip()">+DICA</a></h1></div>
         <div class="panel-body">
           <p>A disciplina de SI1 consiste ao todo de 3 labs, sendo o primeiro deles o mais fácil de todos! O 1° lab exige conhecimentos relativamente simples, como javascript
             , css e html, para obter dicas sobre eles basta ir na aba <a href="/ferramentas">ferramentas</a>.
             O 2° lab por outro lado exige mais conhecimentos em outras ferramentas, como o play framework e o intellij, além de um pouco de conhecimento sobre <a href="/padroesDeProjeto">padrões de projeto</a>.
             O último porém não menos importante é o 3° lab, o qual faz uso de todos os conhecimentos já vistos e também da ferramenta <a href="/heroku">heroku</a>.</p>
         </div>
-        <a id="dica" class="btn pull-right" onclick="javascrpit:newTip()">+DICA</a>
         <p id="newTip"></p>
       </div>
       @for(tip <- tips){
-        <div id="teste">
-          <p>@tip.getTitulo</p>
-          <p>@tip.getConteudo</p>
-          <p>@tip.getAutor</p>
+        <div id="infodica" class="panel panel-default">
+          <div class="panel panel-heading"><small class="pull-left"><p>escrita por @tip.getAutor</p></small><p>@tip.getTitulo<a class="btn pull-right"> ver mais</a></p></div>
+          <div class="panel-body"><p>@tip.getConteudo</p>
+            <br>
+          </div>
         </div>
       }
     </section>

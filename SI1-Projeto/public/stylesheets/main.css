@@ -60,11 +60,19 @@ body {
     HOME PAGE
 */
 
-#teste{
-    background-color: #f7e1b5;
-    height: auto;
-    border: 1px solid black;
-    align-self: center;
+#infodica{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 450px;
+    color:#868686;
+    text-align: center;
+    border:3px #E0E0E0 solid;
+    overflow: auto;
+
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
 }
 
 #corpo{
@@ -81,7 +89,7 @@ body {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
-    height: 400px;
+    height: 450px;
     color:#868686;
     text-align: center;
     border:3px #E0E0E0 solid;
@@ -94,8 +102,7 @@ body {
 #info p{
     color: #000000;
     font-family:"Open Sans", Helvetica, sans-serif, arial;
-    font-size: 15px;
-    line-height: 35px;
+    font-size: 20px;
 }
 
 .panel-body{
