@@ -26,6 +26,9 @@ public class Application extends Controller {
     @Transactional
     public static Result index() {
         temas = dao.findAllByClass(Tema.class);
+        if (session().get("user") != null){
+            return redirect(routes.Application.show());
+        }
         return ok(index.render("Meu Forum", loginForm, registroForm));
     }
 
