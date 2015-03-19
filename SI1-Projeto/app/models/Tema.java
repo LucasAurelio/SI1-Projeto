@@ -22,7 +22,6 @@ public class Tema {
         nota = 0;
         quant = 0;
         metadicas = new ArrayList<>();
-        dicas = new ArrayList<>();
     }
 
     public Tema(String nome){

@@ -12,7 +12,9 @@ function newTip(){
     "<option value='PadroesDeProjeto'> Padrões </option>" +
     "<option value='Ferramentas'> Ferramentas </option>" +
     "<option value='Design'> Design </option>" +
-    "</select>" + "<br>" + "<br>" +
+    "</select>" +
+    "<br>" +
+    "<br>" +
     "<input class='btn' type='submit' value='Adicionar'/>"
     + "</form>";
 }

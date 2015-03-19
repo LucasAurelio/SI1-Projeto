@@ -1,13 +1,7 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-/**
- * Created by Erick on 18/03/2015.
- */
 @Entity(name="Dica")
 public class Dica {
 

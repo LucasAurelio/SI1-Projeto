@@ -23,6 +23,9 @@ public class Application extends Controller {
     static Form<User> registroForm = form(User.class).bindFromRequest();
     static Form<User> loginForm = form(User.class).bindFromRequest();
     private static List<Tema> temas = null;
+    private static List<Dica> tips = null;
+    private static List<MetaDica> metaTips = null;
+
 
     @Transactional
     public static Result index() {
@@ -30,21 +33,22 @@ public class Application extends Controller {
         if (session().get("user") != null){
             return redirect(routes.Application.show());
         }
-        return ok(index.render("Meu Forum", loginForm, registroForm));
+        return ok(index.render("Portal Do Leite", loginForm, registroForm));
     }
 
     @Transactional
     public static Result show(){
         if (session().get("user") != null){
-            List<MetaDica> tips = new ArrayList<>();
+            metaTips = new ArrayList<>();
+            tips = new ArrayList<>();
 
             temas = dao.findAllByClass(Tema.class);
             for (Tema tema: temas){
                 if (tema.getNome().equals("Geral")){
-                    tips = tema.getMetadicas();
+                    metaTips = tema.getMetadicas();
                 }
             }
-            return ok(forum.render("Meu Forum",tips));
+            return ok(forum.render("Meu Forum",metaTips,tips));
         }
         return redirect(routes.Application.index());
     }
@@ -100,15 +104,16 @@ public class Application extends Controller {
             User user = (User) dao.findByAttributeName("User", "email", u.getEmail()).get(0);
             session().clear();
             session("user", user.getNome());
-            List<MetaDica> tips = new ArrayList<>();
+            metaTips = new ArrayList<>();
+            tips = new ArrayList<>();
 
             temas = dao.findAllByClass(Tema.class);
             for (Tema tema: temas){
                 if (tema.getNome().equals("Geral")){
-                    tips = tema.getMetadicas();
+                    metaTips = tema.getMetadicas();
                 }
             }
-            return ok(forum.render("Meu Forum",tips));
+            return ok(forum.render("Meu Forum",metaTips,tips));
         }
     }
 
@@ -127,8 +132,8 @@ public class Application extends Controller {
 
     @Transactional
     public static Result showLabs() {
-
-        List<Dica> tips = new ArrayList<>();
+        tips = new ArrayList<>();
+        metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
@@ -136,12 +141,13 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
-        return ok(labs.render("Meu Lab",tips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
     @Transactional
     public static Result showMinitestes() {
-        List<Dica> tips = new ArrayList<>();
+        tips = new ArrayList<>();
+        metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
@@ -149,12 +155,13 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
-        return ok(minitestes.render("Meu Miniteste",tips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
     @Transactional
     public static Result showProjeto() {
-        List<Dica> tips = new ArrayList<>();
+        tips = new ArrayList<>();
+        metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
@@ -162,12 +169,13 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
-        return ok(projeto.render("Meu Projeto",tips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
     @Transactional
     public static Result showHeroku() {
-        List<Dica> tips = new ArrayList<>();
+        tips = new ArrayList<>();
+        metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
@@ -175,12 +183,13 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
-        return ok( heroku.render("Meu Heroku",tips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
     @Transactional
     public static Result showPadroesDeProjeto() {
-        List<Dica> tips = new ArrayList<>();
+        tips = new ArrayList<>();
+        metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
@@ -188,12 +197,13 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
-        return ok(padroesDeProjeto.render("Meu Padrao",tips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
     @Transactional
     public static Result showFerramentas() {
-        List<Dica> tips = new ArrayList<>();
+        tips = new ArrayList<>();
+        metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
@@ -201,12 +211,13 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
-        return ok(ferramentas.render("Minha Ferramenta",tips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
     @Transactional
     public static Result showDesign() {
-        List<Dica> tips = new ArrayList<>();
+        tips = new ArrayList<>();
+        metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
@@ -214,28 +225,36 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
-        return ok(design.render("Meu Design",tips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
     @Transactional
     public static Result newMainTip(){
         DynamicForm form = Form.form().bindFromRequest();
 
-        String autor = session().get("user");
-        String titulo = form.get("titulo");
-        String descricao = form.get("descricao");
-        String tema = form.get("topico");
-
-        MetaDica newMainTip = new MetaDica(autor,titulo,descricao);
+        String author = session().get("user");
+        String title = form.get("titulo");
+        String description = form.get("descricao");
+        String thema = form.get("topico");
 
         temas = dao.findAllByClass(Tema.class);
+        Tema chosenTheme = null;
+
         for (Tema theme: temas){
-            if (theme.getNome().equals(tema)){
-                theme.addMetaDica(newMainTip);
+            if (theme.getNome().equals(thema)){
+                chosenTheme = theme;
             }
         }
 
-        return verificaView(tema);
+        if ((chosenTheme.getNome()).equals("Geral")){
+            MetaDica newMainTip = new MetaDica(author,title,description);
+            chosenTheme.addMetaDica(newMainTip);
+        }else{
+            Dica newMainTip = new Dica(author,title,description);
+            chosenTheme.addDica(newMainTip);
+        }
+
+        return verificaView(thema);
     }
 
     private static Result verificaView(String tema){
