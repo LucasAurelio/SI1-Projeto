@@ -151,9 +151,24 @@ body {
     height: 30px;
     width: 66%;
 }
-#form8{
-    margin-bottom: 2%;
+#form9{
+    margin-right: 1%;
+    width: 20%;
+    height: 30px;
+    margin-bottom: 1%;
 }
+#form10{
+    margin-left: 1%;
+    width: 40%;
+    height: 30px;
+    margin-bottom: 1%;
+}
+#form11{
+    height: 30px;
+    width: 98%;
+    margin-bottom: 1%;
+}
+
 
 .panel-body{
     overflow: auto;

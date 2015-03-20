@@ -282,6 +282,60 @@ public class Application extends Controller {
         return verificaView(tema);
     }
 
+    @Transactional
+    public static Result newMainDisciplina(){
+        DynamicForm form = Form.form().bindFromRequest();
+
+        String autor = session().get("user");
+        String titulo = form.get("disciplina");
+        String conteudo = form.get("porque");
+        String tema = form.get("topico");
+
+        MetaDica newMainTip = new MetaDica(autor,titulo,conteudo);
+        Dica newTip = new Dica(autor, titulo, conteudo);
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema theme: temas){
+            if (theme.getNome().equals(tema)){
+                if(tema.equals("Geral")){
+                    theme.addMetaDica(newMainTip);
+
+                }else{
+                    theme.addDica(newTip);
+                }
+            }
+        }
+
+        return verificaView(tema);
+    }
+
+    @Transactional
+    public static Result newMainAssunto(){
+        DynamicForm form = Form.form().bindFromRequest();
+
+        String autor = session().get("user");
+        String titulo = "É preciso saber para não ter dificuldades:";
+        String assunto = form.get("assunto");
+        String tema = form.get("topico");
+
+        MetaDica newMainTip = new MetaDica(autor,titulo,assunto);
+        Dica newTip = new Dica(autor, titulo, assunto);
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema theme: temas){
+            if (theme.getNome().equals(tema)){
+                if(tema.equals("Geral")){
+                    theme.addMetaDica(newMainTip);
+
+                }else{
+                    theme.addDica(newTip);
+                }
+            }
+        }
+
+        return verificaView(tema);
+    }
+
     private static Result verificaView(String tema){
         if(tema.equals("Geral")){
             return redirect(routes.Application.show());

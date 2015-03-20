@@ -41,6 +41,7 @@
           <a id="dica" class="btn pull-right" onclick="javascrpit:newTip()">+DICA</a>
           <a id="dica" class="btn pull-right" onclick="javascrpit:newLink()">+LINK</a>
           <a id="dica" class="btn pull-right" onclick="javascrpit:newDisciplina()">+DISCIPLINA</a>
+          <a id="dica" class="btn pull-right" onclick="javascrpit:newAssunto()">+Assunto</a>
         </div>
         <div id="newTip"></div>
       </div>
@@ -56,7 +57,7 @@
       }else{
         @for(metaTip <- metaTips){
           <div id="infodica" class="panel panel-default">
-            <div class="panel panel-heading"><p>@metaTip.getTitulo<a class="btn pull-right"> ver mais</a></p></div>
+            <div class="panel panel-heading"><p>@metaTip.getTitulo</p></div>
             <div class="panel-body"><p>@metaTip.getConteudo</p></div>
             <div><small class="pull-left"><p>escrita por @metaTip.getAutor</p></small></div>
             <a class="btn pull-right"> ver mais</a>
