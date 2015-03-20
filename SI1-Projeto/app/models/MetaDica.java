@@ -1,17 +1,13 @@
 package models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name="MetaDica")
 public class MetaDica extends Dica {
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<MetaDica> metaDicas;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @OneToMany
     private List<Dica> dicas;
 
     public MetaDica() {
@@ -19,21 +15,18 @@ public class MetaDica extends Dica {
         dicas = new ArrayList<>();
     }
 
-    public MetaDica(String autor, String titulo, String conteudo) {
+    public MetaDica(String autor, String titulo, String conteudo){
         super(autor, titulo, conteudo);
-    }
-
-    public void addMetaDicas(MetaDica dica) { metaDicas.add(dica); }
-
-    public List<MetaDica> getMetaDicas() {
-        return metaDicas;
+        dicas = new ArrayList<>();
     }
 
     public List<Dica> getDicas() {
         return dicas;
     }
 
-    public void addDicas(Dica dica) { dicas.add(dica); }
-
+    public void addDica(Dica dica){
+        dicas.add(dica);
+    }
 }
+
 

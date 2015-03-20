@@ -232,29 +232,27 @@ public class Application extends Controller {
     public static Result newMainTip(){
         DynamicForm form = Form.form().bindFromRequest();
 
-        String author = session().get("user");
-        String title = form.get("titulo");
-        String description = form.get("descricao");
-        String thema = form.get("topico");
+        String autor = session().get("user");
+        String titulo = form.get("titulo");
+        String descricao = form.get("descricao");
+        String tema = form.get("topico");
+
+        MetaDica newMainTip = new MetaDica(autor,titulo,descricao);
+        Dica newTip = new Dica(autor, titulo, descricao);
 
         temas = dao.findAllByClass(Tema.class);
-        Tema chosenTheme = null;
-
         for (Tema theme: temas){
-            if (theme.getNome().equals(thema)){
-                chosenTheme = theme;
+            if (theme.getNome().equals(tema)){
+                if(tema.equals("Geral")){
+                    theme.addMetaDica(newMainTip);
+
+                }else{
+                    theme.addDica(newTip);
+                }
             }
         }
 
-        if ((chosenTheme.getNome()).equals("Geral")){
-            MetaDica newMainTip = new MetaDica(author,title,description);
-            chosenTheme.addMetaDica(newMainTip);
-        }else{
-            Dica newMainTip = new Dica(author,title,description);
-            chosenTheme.addDica(newMainTip);
-        }
-
-        return verificaView(thema);
+        return verificaView(tema);
     }
 
     private static Result verificaView(String tema){

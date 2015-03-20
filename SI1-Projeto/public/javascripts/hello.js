@@ -1,9 +1,7 @@
 function newTip(){
     document.getElementById('newTip').innerHTML = "<form method='post' action='/newMainTip'>" +
-    "<input name='titulo' style='width:30%' type='text' placeholder='Título' required/>" + "<br>" + "<br>" +
-    "<input name='descricao' style='width:30%' type='text' placeholder='Digite aqui sua dica!' required/>" + "<br>" + "<br>" +
-    "<select name='topico' style='width:30%'>" +
-    "<option value='Geral'> Tópico </option>" +
+    "<select name='topico' id='form1'>" +
+    "<option value='Geral'> Tema </option>" +
     "<option value='Geral'> Geral </option>" +
     "<option value='Laboratórios'> Labs </option>" +
     "<option value='Minitestes'> Minitestes </option>" +
@@ -13,8 +11,27 @@ function newTip(){
     "<option value='Ferramentas'> Ferramentas </option>" +
     "<option value='Design'> Design </option>" +
     "</select>" +
+    "<input name='titulo' id='form2' type='text' placeholder='Título' required/>" +
+    "<input name='descricao' id='form3' type='text' placeholder='Digite a sua dica aqui' required/>" + "<br>" +
+    "<input class='btn' id='form4' type='submit' value='Adicionar'/>" +
+    "</form>";
+}
+
+function newLink(){
+    document.getElementById('newTip').innerHTML = "<form method='post' action='/newMainLink'>" +
+    "<select name='topico' id='form5'>" +
+    "<option value='Geral'> Tema </option>" +
+    "<option value='Geral'> Geral </option>" +
+    "<option value='Laboratórios'> Labs </option>" +
+    "<option value='Minitestes'> Minitestes </option>" +
+    "<option value='Projeto'> Projeto </option>" +
+    "<option value='Heroku'> Heroku </option>" +
+    "<option value='PadroesDeProjeto'> Padrões </option>" +
+    "<option value='Ferramentas'> Ferramentas </option>" +
+    "<option value='Design'> Design </option>" +
+    "</select>" +
+    "<input type='url' name='url' id='form6' placeholder='Digite o seu link aqui' pattern='https?://.+' required>" +
     "<br>" +
-    "<br>" +
-    "<input class='btn' type='submit' value='Adicionar'/>"
-    + "</form>";
+    "<input class='btn' id='form7' type='submit' value='Adicionar'/>" +
+    "</form>"
 }

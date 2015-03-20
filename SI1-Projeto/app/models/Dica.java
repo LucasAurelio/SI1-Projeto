@@ -1,19 +1,23 @@
 package models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity(name="Dica")
 public class Dica {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    protected Long id;
-    protected String titulo, conteudo, autor;
+    @GeneratedValue
+    private long id;
+    @Column
+    private String titulo, conteudo, autor;
 
     public Dica(){
     }
 
     public Dica(String autor, String titulo, String conteudo) {
+        this();
         setAutor(autor);
         setTitulo(titulo);
         setConteudo(conteudo);
@@ -42,6 +46,8 @@ public class Dica {
     public void setAutor(String autor) {
         this.autor = autor;
     }
+
+
 }
 
 
