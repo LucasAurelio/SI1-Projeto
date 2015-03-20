@@ -16,9 +16,6 @@ public class Tema {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     private List<Dica> dicas;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<DicaUrl> urldicas;
     private int nota, quant;
 
     public Tema() {
@@ -26,7 +23,6 @@ public class Tema {
         quant = 0;
         metadicas = new ArrayList<>();
         dicas = new ArrayList<>();
-        urldicas = new ArrayList<>();
     }
 
     public Tema(String nome){
@@ -76,13 +72,5 @@ public class Tema {
 
     public void addDica(Dica dica) {
         dicas.add(dica);
-    }
-
-    public List<DicaUrl> getUrldicas() {
-        return urldicas;
-    }
-
-    public void addUrldica(DicaUrl urldica) {
-        urldicas.add(urldica);
     }
 }

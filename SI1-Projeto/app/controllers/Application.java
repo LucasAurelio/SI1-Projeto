@@ -22,8 +22,6 @@ public class Application extends Controller {
     private static List<Tema> temas = null;
     private static List<Dica> tips = null;
     private static List<MetaDica> metaTips = null;
-    //----- mexi aqui -----//
-    private static List<DicaUrl> urlTips = null;
 
 
     @Transactional
@@ -35,23 +33,20 @@ public class Application extends Controller {
         return ok(index.render("Portal Do Leite", loginForm, registroForm));
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result show(){
         if (session().get("user") != null){
             metaTips = new ArrayList<>();
             tips = new ArrayList<>();
-            urlTips = new ArrayList<>();
 
 
             temas = dao.findAllByClass(Tema.class);
             for (Tema tema: temas){
                 if (tema.getNome().equals("Geral")){
                     metaTips = tema.getMetadicas();
-                    urlTips = tema.getUrldicas();
                 }
             }
-            return ok(forum.render("Meu Forum",metaTips,tips, urlTips));
+            return ok(forum.render("Meu Forum",metaTips,tips));
         }
         return redirect(routes.Application.index());
     }
@@ -92,7 +87,6 @@ public class Application extends Controller {
         return show();
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result authenticate() {
 
@@ -110,16 +104,14 @@ public class Application extends Controller {
             session("user", user.getNome());
             metaTips = new ArrayList<>();
             tips = new ArrayList<>();
-            urlTips = new ArrayList<>();
 
             temas = dao.findAllByClass(Tema.class);
             for (Tema tema: temas){
                 if (tema.getNome().equals("Geral")){
                     metaTips = tema.getMetadicas();
-                    urlTips = tema.getUrldicas();
                 }
             }
-            return ok(forum.render("Meu Forum",metaTips,tips, urlTips));
+            return ok(forum.render("Meu Forum",metaTips,tips));
         }
     }
 
@@ -136,126 +128,104 @@ public class Application extends Controller {
         return true;
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result showLabs() {
         tips = new ArrayList<>();
-        urlTips = new ArrayList<>();
         metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Laboratórios")){
                 tips = tema.getDicas();
-                urlTips = tema.getUrldicas();
             }
         }
-        return ok(forum.render("Meu Forum", metaTips, tips, urlTips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result showMinitestes() {
         tips = new ArrayList<>();
-        urlTips = new ArrayList<>();
         metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Minitestes")){
                 tips = tema.getDicas();
-                urlTips = tema.getUrldicas();
             }
         }
-        return ok(forum.render("Meu Forum", metaTips, tips, urlTips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result showProjeto() {
         tips = new ArrayList<>();
-        urlTips = new ArrayList<>();
         metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Projeto")){
                 tips = tema.getDicas();
-                urlTips = tema.getUrldicas();
             }
         }
-        return ok(forum.render("Meu Forum", metaTips, tips, urlTips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result showHeroku() {
         tips = new ArrayList<>();
-        urlTips = new ArrayList<>();
         metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Heroku")){
                 tips = tema.getDicas();
-                urlTips = tema.getUrldicas();
             }
         }
-        return ok(forum.render("Meu Forum", metaTips, tips, urlTips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result showPadroesDeProjeto() {
         tips = new ArrayList<>();
-        urlTips = new ArrayList<>();
         metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("PadroesDeProjeto")){
                 tips = tema.getDicas();
-                urlTips = tema.getUrldicas();
             }
         }
-        return ok(forum.render("Meu Forum", metaTips, tips, urlTips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result showFerramentas() {
         tips = new ArrayList<>();
-        urlTips = new ArrayList<>();
         metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Ferramentas")){
                 tips = tema.getDicas();
-                urlTips = tema.getUrldicas();
             }
         }
-        return ok(forum.render("Meu Forum", metaTips, tips, urlTips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
-    //----- mexi aqui -----//
     @Transactional
     public static Result showDesign() {
         tips = new ArrayList<>();
-        urlTips = new ArrayList<>();
         metaTips = null;
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema tema: temas){
             if (tema.getNome().equals("Design")){
                 tips = tema.getDicas();
-                urlTips = tema.getUrldicas();
             }
         }
-        return ok(forum.render("Meu Forum", metaTips, tips, urlTips));
+        return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
-    //----- tem que mexer aqui, eu acho -----//
     @Transactional
     public static Result newMainTip() throws Exception {
         DynamicForm form = Form.form().bindFromRequest();
@@ -267,7 +237,6 @@ public class Application extends Controller {
 
         MetaDica newMainTip = new MetaDica(autor,titulo,descricao);
         Dica newTip = new Dica(autor, titulo, descricao);
-        DicaUrl newUrlTip = new DicaUrl(autor, titulo, descricao);
 
         temas = dao.findAllByClass(Tema.class);
         for (Tema theme: temas){
@@ -290,8 +259,13 @@ public class Application extends Controller {
 
         String autor = session().get("user");
         String titulo = form.get("titulo");
-        String url = "<a href='" + form.get("url") +"'>"+form.get("url")+"</a>";
+        String url = form.get("url");
         String tema = form.get("topico");
+
+        if(validateURL(url)){
+            flash("fail", "O link deve terminar com: .com, .com.br, .edu ou .edu.br ");
+            return redirect(routes.Application.show());
+        }
 
         MetaDica newMainTip = new MetaDica(autor,titulo,url);
         Dica newTip = new Dica(autor, titulo, url);
@@ -309,6 +283,13 @@ public class Application extends Controller {
         }
 
         return verificaView(tema);
+    }
+
+    private static boolean validateURL(String url){
+        if((url.endsWith(".com")) || (url.endsWith(".com.br")) || (url.endsWith(".edu")) || (url.endsWith(".edu.br"))){
+            return false;
+        }
+        return true;
     }
 
     @Transactional

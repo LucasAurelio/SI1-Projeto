@@ -43,9 +43,12 @@
           <a id="dica" class="btn pull-right" onclick="javascrpit:newDisciplina()">+DISCIPLINA</a>
           <a id="dica" class="btn pull-right" onclick="javascrpit:newAssunto()">+Assunto</a>
         </div>
-        <div id="newTip"></div>
+        <div id="newTip">
+        @if(flash.contains("fail")) {
+          <p class="bg-danger" style="">@flash.get("fail")</p>
+        }
+        </div>
       </div>
-      <option></option>
       @if(metaTips==null){
         @for(tip <- tips){
           <div id="infodica" class="panel panel-default">
