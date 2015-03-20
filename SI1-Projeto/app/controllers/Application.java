@@ -255,6 +255,33 @@ public class Application extends Controller {
         return verificaView(tema);
     }
 
+    @Transactional
+    public static Result newMainLink(){
+        DynamicForm form = Form.form().bindFromRequest();
+
+        String autor = session().get("user");
+        String titulo = form.get("titulo");
+        String url = "<a href='" + form.get("url") +"'>"+form.get("url")+"</a>";
+        String tema = form.get("topico");
+
+        MetaDica newMainTip = new MetaDica(autor,titulo,url);
+        Dica newTip = new Dica(autor, titulo, url);
+
+        temas = dao.findAllByClass(Tema.class);
+        for (Tema theme: temas){
+            if (theme.getNome().equals(tema)){
+                if(tema.equals("Geral")){
+                    theme.addMetaDica(newMainTip);
+
+                }else{
+                    theme.addDica(newTip);
+                }
+            }
+        }
+
+        return verificaView(tema);
+    }
+
     private static Result verificaView(String tema){
         if(tema.equals("Geral")){
             return redirect(routes.Application.show());

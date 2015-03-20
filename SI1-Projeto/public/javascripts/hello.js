@@ -30,8 +30,10 @@ function newLink(){
     "<option value='Ferramentas'> Ferramentas </option>" +
     "<option value='Design'> Design </option>" +
     "</select>" +
-    "<input type='url' name='url' id='form6' placeholder='Digite o seu link aqui' pattern='https?://.+' required>" +
     "<br>" +
-    "<input class='btn' id='form7' type='submit' value='Adicionar'/>" +
+    "<input name='titulo' id='form6 type='text' placeholder='Título' required/>" +
+    "<input type='url' name='url' id='form7' placeholder='Digite o seu link aqui' pattern='https?://.+' required>" +
+    "<br>" +
+    "<input class='btn' id='form8' type='submit' value='Adicionar'/>" +
     "</form>"
 }
