@@ -36,9 +36,14 @@ public class Application extends Controller {
     }
     
     @Transactional
-    private static Result conteudoOfensivo(Long id) {
+    public static Result conteudoOfensivo(Long id) {
         Dica tip = dao.findByEntityId(Dica.class, id);
+
         tip.addConteudoInapropriado();
+
+        if (tip.getConteudoInapropriado()==3){
+            dao.removeById(Dica.class,id);
+        }
 
         return redirect(routes.Application.show());
     }

@@ -78,6 +78,7 @@ body {
 
 #titulo{
     align-self: center;
+    margin-left: 9%;
 }
 
 #corpo{
@@ -244,6 +245,17 @@ p{
     width: 40px;
     border-color: #2b542c;
     margin-left: 2px;
+}
+
+#infodica2{
+    margin-top: 4%;
+}
+
+#ban{
+    background: url(https://sc.multiplay.co.uk/images/icons/no_m.png) no-repeat;
+    height: 40px;
+    width: 40px;
+
 }
 
 #indice{
