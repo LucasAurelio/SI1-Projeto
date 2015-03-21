@@ -16,16 +16,21 @@ public class Tema {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     private List<Dica> dicas;
+    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL )
+    private List<User> usersQueDeramNota;
     @Column
-    private int nota, quant, cont, dificuldade;
+    private int quant, dificuldade;
+    @Column
+    private boolean temaFiltro;
 
     public Tema() {
-        nota = 0;
         quant = 0;
-        cont = 0;
         dificuldade = 0;
         metadicas = new ArrayList<>();
         dicas = new ArrayList<>();
+        usersQueDeramNota = new ArrayList<>();
+        temaFiltro = false;
     }
 
     public Tema(String nome){
@@ -48,14 +53,9 @@ public class Tema {
         this.nome = nome;
     }
 
-    public void addNota(int nota) {
-        this.nota += nota;
-        quant += 1;
-    }
-
-    public double mediaNotas(){
+    public double getMediaDificuldade(){
         if(quant != 0){
-            return nota/quant;
+            return dificuldade/quant;
         }
 
         return 0.0;
@@ -77,11 +77,28 @@ public class Tema {
         dicas.add(dica);
     }
 
-    public int getDificuldade() {
-        return dificuldade/cont;
-    }
-
     public void addDificuldade(int dificuldade) {
         this.dificuldade += dificuldade;
+        this.quant++;
+    }
+
+    public List<User> getUsersQueDeramNota(){
+        return usersQueDeramNota;
+    }
+
+    public void addUserQueDeuNota(User user){
+        usersQueDeramNota.add(user);
+    }
+
+    public void setTemaFiltroFalse(){
+        temaFiltro = false;
+    }
+
+    public void setTemaFiltroTrue(){
+        temaFiltro = true;
+    }
+
+    public boolean getTemaFiltro(){
+        return temaFiltro;
     }
 }

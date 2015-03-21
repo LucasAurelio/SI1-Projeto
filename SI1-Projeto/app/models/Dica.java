@@ -12,7 +12,7 @@ public class Dica implements Comparable<Dica>{
     @Column
     private String titulo, conteudo, autor;
     @Column
-    private int concordancias,discordancias;
+    private double concordancias,discordancias;
     @Column
     private double indiceConcordancia;
     @Column
@@ -68,7 +68,7 @@ public class Dica implements Comparable<Dica>{
         calculaIndiceConcordancia();
     }
 
-    public int getConcordancias(){
+    public double getConcordancias(){
         return concordancias;
     }
 
@@ -77,7 +77,7 @@ public class Dica implements Comparable<Dica>{
         calculaIndiceConcordancia();
     }
 
-    public int getDiscordancias(){
+    public double getDiscordancias(){
         return discordancias;
     }
 
@@ -86,7 +86,9 @@ public class Dica implements Comparable<Dica>{
             indiceConcordancia = 0;
         }else if(concordancias==0 && discordancias>=1){
             indiceConcordancia = discordancias;
-        }else{
+        }else if(concordancias==0 && discordancias==0){
+            indiceConcordancia = 0;
+        }else if(concordancias>=1 && discordancias>=1){
             indiceConcordancia = concordancias/(concordancias+discordancias);
         }
     }

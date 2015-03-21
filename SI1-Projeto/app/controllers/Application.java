@@ -28,7 +28,6 @@ public class Application extends Controller {
 
     @Transactional
     public static Result index() {
-        temas = dao.findAllByClass(Tema.class);
         if (session().get("user") != null){
             return redirect(routes.Application.show());
         }
@@ -152,6 +151,9 @@ public class Application extends Controller {
         for (Tema tema: temas){
             if (tema.getNome().equals("Laboratórios")){
                 tips = tema.getDicas();
+                tema.setTemaFiltroTrue();
+            }else{
+                tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
@@ -167,6 +169,9 @@ public class Application extends Controller {
         for (Tema tema: temas){
             if (tema.getNome().equals("Minitestes")){
                 tips = tema.getDicas();
+                tema.setTemaFiltroTrue();
+            }else{
+                tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
@@ -182,6 +187,9 @@ public class Application extends Controller {
         for (Tema tema: temas){
             if (tema.getNome().equals("Projeto")){
                 tips = tema.getDicas();
+                tema.setTemaFiltroTrue();
+            }else{
+                tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
@@ -197,6 +205,9 @@ public class Application extends Controller {
         for (Tema tema: temas){
             if (tema.getNome().equals("Heroku")){
                 tips = tema.getDicas();
+                tema.setTemaFiltroTrue();
+            }else{
+                tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
@@ -212,6 +223,9 @@ public class Application extends Controller {
         for (Tema tema: temas){
             if (tema.getNome().equals("PadroesDeProjeto")){
                 tips = tema.getDicas();
+                tema.setTemaFiltroTrue();
+            }else{
+                tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
@@ -227,6 +241,9 @@ public class Application extends Controller {
         for (Tema tema: temas){
             if (tema.getNome().equals("Ferramentas")){
                 tips = tema.getDicas();
+                tema.setTemaFiltroTrue();
+            }else{
+                tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
@@ -242,6 +259,9 @@ public class Application extends Controller {
         for (Tema tema: temas){
             if (tema.getNome().equals("Design")){
                 tips = tema.getDicas();
+                tema.setTemaFiltroTrue();
+            }else{
+                tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
@@ -389,7 +409,15 @@ public class Application extends Controller {
         tip.addConcordancia();
         tip.addUsuarioComVoto(userComVoto);
 
-        return redirect(routes.Application.show());
+        String nomeDaClasse = null;
+        List<Tema> allTemas = dao.findAllByClass(Tema.class);
+        for(Tema ttt: allTemas){
+            if(ttt.getTemaFiltro()){
+                nomeDaClasse = ttt.getNome();
+            }
+        }
+
+        return verificaView(nomeDaClasse);
     }
 
     @Transactional
@@ -409,12 +437,19 @@ public class Application extends Controller {
         if(verificaUsuarioComVoto(tip)){
             flash("fail", "Você já avaliou essa dica!");
             return redirect(routes.Application.show());
-        }else{
-            tip.addDiscordancia();
-            tip.addUsuarioComVoto(userComVoto);
+        }
+        tip.addDiscordancia();
+        tip.addUsuarioComVoto(userComVoto);
+
+        String nomeDaClasse = null;
+        List<Tema> allTemas = dao.findAllByClass(Tema.class);
+        for(Tema ttt: allTemas){
+            if(ttt.getTemaFiltro()){
+                nomeDaClasse = ttt.getNome();
+            }
         }
 
-        return redirect(routes.Application.show());
+        return verificaView(nomeDaClasse);
     }
 
     private static boolean verificaUsuarioComVoto(Dica tip){

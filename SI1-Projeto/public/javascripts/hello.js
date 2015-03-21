@@ -12,7 +12,7 @@ function newTip(){
     "<option value='Design'> Design </option>" +
     "</select>" +
     "<input name='titulo' id='form2' type='text' placeholder='Título' required/>" +
-    "<input name='descricao' id='form3' type='text' placeholder='Digite a sua dica aqui' required/>" + "<br>" +
+    "<textarea id='form3'  cols='50' rows='4' name='descricao'></textarea>" + "<br>" +
     "<input class='btn' id='form4' type='submit' value='Adicionar'/>" +
     "</form>";
 }
@@ -77,5 +77,12 @@ function newAssunto(){
     "<input name='assunto' id='form11' type='text' placeholder='Digite o nome do assunto aqui.' required/>" +
     "<br>" +
     "<input class='btn' id='form4' type='submit' value='Adicionar'/>" +
+    "</form>"
+}
+
+function notaDoTema(){
+    document.getElementById("notaDoTema").innerHTML = "<form method='get' action='/dificuldade'> " +
+    "<input type='dificuldade' name='quantity' min='-2' max='2'> " +
+    "<input type='submit'>" +
     "</form>"
 }

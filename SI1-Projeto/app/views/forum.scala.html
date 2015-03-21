@@ -38,11 +38,15 @@
             , css e html, para obter dicas sobre eles basta ir na aba <a href="/ferramentas">ferramentas</a>.
             O 2° lab por outro lado exige mais conhecimentos em outras ferramentas, como o play framework e o intellij, além de um pouco de conhecimento sobre <a href="/padroesDeProjeto">padrões de projeto</a>.
             O último porém não menos importante é o 3° lab, o qual faz uso de todos os conhecimentos já vistos e também da ferramenta <a href="/heroku">heroku</a>.</p>
+          @if(metaTips==null){
+            <a id="tema" class="btn pull-left" onclick="javascript:notaDoTema()">Defina a dificuldade do tema</a>
+          }
           <a id="dica" class="btn pull-right" onclick="javascrpit:newTip()">+DICA</a>
           <a id="dica" class="btn pull-right" onclick="javascrpit:newLink()">+LINK</a>
           <a id="dica" class="btn pull-right" onclick="javascrpit:newDisciplina()">+DISCIPLINA</a>
           <a id="dica" class="btn pull-right" onclick="javascrpit:newAssunto()">+Assunto</a>
         </div>
+        <div id="notaDoTema"></div>
         <div id="newTip">
         @if(flash.contains("fail")) {
           <p class="bg-danger" style="">@flash.get("fail")</p>
