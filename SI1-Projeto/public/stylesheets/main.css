@@ -67,6 +67,7 @@ body {
     height: auto;
     color:#868686;
     text-align: center;
+    align-content: center;
     border:3px #E0E0E0 solid;
     overflow: auto;
 
@@ -228,6 +229,26 @@ p{
     height:139px;
     text-indent: -9999;
     width:302px;
+}
+
+#cookieUP{
+    background: url(http://images-mediawiki-sites.thefullwiki.org/11/3/0/5/476911825833948.png) no-repeat;
+    height: 40px;
+    width: 40px;
+    border-color: #2b542c;
+}
+
+#flyDown{
+    background: url(http://icons.iconarchive.com/icons/lyle-zapato/arthropodicons/32/House-Fly-icon.png) no-repeat;
+    height: 40px;
+    width: 40px;
+    border-color: #2b542c;
+    margin-left: 2px;
+}
+
+#indice{
+    margin-left: 12%;
+    margin-top: 10px;
 }
 
 nav{

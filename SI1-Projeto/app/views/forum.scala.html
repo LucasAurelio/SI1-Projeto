@@ -53,15 +53,25 @@
         @for(tip <- tips){
           <div id="infodica" class="panel panel-default">
             <div class="panel panel-heading"><p id="titulo">@tip.getTitulo</p></div>
-            <div class="panel-body"><p>@tip.getConteudo</p></div>
-            <div><small class="pull-left"><p>escrita por @tip.getAutor</p></small></div>
+            <div class="panel-body">
+              <p>@tip.getConteudo</p>
+            </div>
+            <div>
+              <small class="pull-left"><p>escrita por @tip.getAutor</p></small>
+              <a class="pull-right" id="flyDown" href="@routes.Application.flyDown(tip.getId)" title="Discordo!"></a>
+              <a class="pull-right" id="cookieUP" href="@routes.Application.cookieUP(tip.getId)" title="Concordo!"></a>
+            </div>
+            <br>
+            <small><p id="indice">Índice de discordância: @tip.getConcordancias</p></small>
           </div>
         }
       }else{
         @for(metaTip <- metaTips){
           <div id="infodica" class="panel panel-default">
             <div class="panel panel-heading"><p>@metaTip.getTitulo</p></div>
-            <div class="panel-body"><p>@metaTip.getConteudo</p></div>
+            <div class="panel-body">
+              <p>@metaTip.getConteudo</p>
+            </div>
             <div><small class="pull-left"><p>escrita por @metaTip.getAutor</p></small></div>
             <a class="btn pull-right"> ver mais</a>
             <div></div>

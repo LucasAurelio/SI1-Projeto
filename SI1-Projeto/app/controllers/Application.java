@@ -10,6 +10,8 @@ import play.mvc.Result;
 import views.html.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static play.data.Form.form;
@@ -139,6 +141,7 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
+        Collections.sort(tips);
         return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
@@ -153,6 +156,7 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
+        Collections.sort(tips);
         return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
@@ -167,6 +171,7 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
+        Collections.sort(tips);
         return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
@@ -181,6 +186,7 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
+        Collections.sort(tips);
         return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
@@ -195,6 +201,7 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
+        Collections.sort(tips);
         return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
@@ -209,6 +216,7 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
+        Collections.sort(tips);
         return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
@@ -223,6 +231,7 @@ public class Application extends Controller {
                 tips = tema.getDicas();
             }
         }
+        Collections.sort(tips);
         return ok(forum.render("Meu Forum", metaTips, tips));
     }
 
@@ -344,6 +353,22 @@ public class Application extends Controller {
         }
 
         return verificaView(tema);
+    }
+
+    @Transactional
+    public static Result cookieUP(Long id){
+        Dica tip = dao.findByEntityId(Dica.class,id);
+        tip.addConcordancia();
+
+        return redirect(routes.Application.show());
+    }
+
+    @Transactional
+    public static Result flyDown(Long id){
+        Dica tip = dao.findByEntityId(Dica.class,id);
+        tip.addDiscordancia();
+
+        return redirect(routes.Application.show());
     }
 
     private static Result verificaView(String tema){
