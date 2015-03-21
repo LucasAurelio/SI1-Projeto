@@ -11,10 +11,10 @@ public class Tema {
     private Long id;
     private String nome;
     @OneToMany(cascade = CascadeType.ALL)
-    @Column
+    @JoinColumn
     private List<MetaDica> metadicas;
     @OneToMany(cascade = CascadeType.ALL)
-    @Column
+    @JoinColumn
     private List<Dica> dicas;
     @Column
     private int nota, quant, cont, dificuldade;

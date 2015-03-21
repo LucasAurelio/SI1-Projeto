@@ -371,7 +371,23 @@ public class Application extends Controller {
     @Transactional
     public static Result cookieUP(Long id){
         Dica tip = dao.findByEntityId(Dica.class, id);
+
+        String userVotando = session().get("user");
+        List<User> allUsers = dao.findAllByClass(User.class);
+        User userComVoto = null;
+
+        for(User user: allUsers){
+            if((user.getNome()).equals(userVotando)){
+                userComVoto = user;
+            }
+        }
+
+        if(verificaUsuarioComVoto(tip)){
+            flash("fail", "Você já avaliou essa dica!");
+            return redirect(routes.Application.show());
+        }
         tip.addConcordancia();
+        tip.addUsuarioComVoto(userComVoto);
 
         return redirect(routes.Application.show());
     }
@@ -379,9 +395,38 @@ public class Application extends Controller {
     @Transactional
     public static Result flyDown(Long id){
         Dica tip = dao.findByEntityId(Dica.class, id);
-        tip.addDiscordancia();
+
+        String userVotando = session().get("user");
+        List<User> allUSers = dao.findAllByClass(User.class);
+        User userComVoto = null;
+
+        for(User user: allUSers){
+            if(user.getNome().equals(userVotando)){
+                userComVoto = user;
+            }
+        }
+
+        if(verificaUsuarioComVoto(tip)){
+            flash("fail", "Você já avaliou essa dica!");
+            return redirect(routes.Application.show());
+        }else{
+            tip.addDiscordancia();
+            tip.addUsuarioComVoto(userComVoto);
+        }
 
         return redirect(routes.Application.show());
+    }
+
+    private static boolean verificaUsuarioComVoto(Dica tip){
+        List<User> usersComVoto = tip.getUsuariosComVoto();
+        String userVotando = session().get("user");
+
+        for(User user: usersComVoto){
+            if((user.getNome()).equals(userVotando)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private static Result verificaView(String tema){

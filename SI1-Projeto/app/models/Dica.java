@@ -19,10 +19,10 @@ public class Dica implements Comparable<Dica>{
     private int conteudoInapropriado;
     @Column
     @OneToMany
-    private List<User> usuarios;
+    private List<User> usuariosComVoto;
 
     public Dica(){
-        usuarios = new ArrayList<>();
+        usuariosComVoto = new ArrayList<>();
     }
 
     public Dica(String autor, String titulo, String conteudo) {
@@ -113,12 +113,12 @@ public class Dica implements Comparable<Dica>{
         return conteudoInapropriado;
     }
 
-    public List<User> getUsuarios() {
-        return usuarios;
+    public List<User> getUsuariosComVoto() {
+        return usuariosComVoto;
     }
 
-    public void addUsuarios(User usuario){
-        usuarios.add(usuario);
+    public void addUsuarioComVoto(User usuario){
+        usuariosComVoto.add(usuario);
     }
 }
 
