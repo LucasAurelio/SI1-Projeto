@@ -1,18 +1,24 @@
 package models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity(name = "User")
 public class User {
     @Id
     @GeneratedValue
     private long id;
+    @Column
     private String nome, email, password;
 
     public User(){
+
     }
 
     public User(String nome, String email, String password)throws Exception{
+        this();
         setNome(nome);
         setEmail(email);
         setPassword(password);

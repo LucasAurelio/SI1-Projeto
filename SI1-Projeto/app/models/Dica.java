@@ -1,9 +1,8 @@
 package models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name="Dica")
 public class Dica implements Comparable<Dica>{
@@ -18,8 +17,12 @@ public class Dica implements Comparable<Dica>{
     private double indiceConcordancia;
     @Column
     private int conteudoInapropriado;
+    @Column
+    @OneToMany
+    private List<User> usuarios;
 
     public Dica(){
+        usuarios = new ArrayList<>();
     }
 
     public Dica(String autor, String titulo, String conteudo) {
@@ -108,6 +111,14 @@ public class Dica implements Comparable<Dica>{
 
     public int getConteudoInapropriado() {
         return conteudoInapropriado;
+    }
+
+    public List<User> getUsuarios() {
+        return usuarios;
+    }
+
+    public void addUsuarios(User usuario){
+        usuarios.add(usuario);
     }
 }
 
