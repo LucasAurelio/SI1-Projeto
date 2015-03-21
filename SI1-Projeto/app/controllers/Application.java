@@ -34,6 +34,14 @@ public class Application extends Controller {
         }
         return ok(index.render("Portal Do Leite", loginForm, registroForm));
     }
+    
+    @Transactional
+    private static Result conteudoOfensivo(Long id) {
+        Dica tip = dao.findByEntityId(Dica.class, id);
+        tip.addConteudoInapropriado();
+
+        return redirect(routes.Application.show());
+    }
 
     @Transactional
     public static Result show(){
@@ -48,7 +56,7 @@ public class Application extends Controller {
                     metaTips = tema.getMetadicas();
                 }
             }
-            return ok(forum.render("Meu Forum",metaTips,tips));
+            return ok(forum.render("Meu Forum", metaTips, tips));
         }
         return redirect(routes.Application.index());
     }
@@ -357,7 +365,7 @@ public class Application extends Controller {
 
     @Transactional
     public static Result cookieUP(Long id){
-        Dica tip = dao.findByEntityId(Dica.class,id);
+        Dica tip = dao.findByEntityId(Dica.class, id);
         tip.addConcordancia();
 
         return redirect(routes.Application.show());
@@ -365,7 +373,7 @@ public class Application extends Controller {
 
     @Transactional
     public static Result flyDown(Long id){
-        Dica tip = dao.findByEntityId(Dica.class,id);
+        Dica tip = dao.findByEntityId(Dica.class, id);
         tip.addDiscordancia();
 
         return redirect(routes.Application.show());

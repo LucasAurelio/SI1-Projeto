@@ -51,8 +51,9 @@
       </div>
       @if(metaTips==null){
         @for(tip <- tips){
+          @if(tip.getConteudoInapropriado() <= 3){
           <div id="infodica" class="panel panel-default">
-            <div class="panel panel-heading"><p id="titulo">@tip.getTitulo</p></div>
+            <div class="panel panel-heading"><p id="titulo">@tip.getTitulo <a class="pull-right" href="@routes.Application.conteudoOfensivo(tip.getId)" title="Ofensivo"></a></p></div>
             <div class="panel-body">
               <p>@tip.getConteudo</p>
             </div>
@@ -64,18 +65,21 @@
             <br>
             <small><p id="indice">Índice de discordância: @tip.getConcordancias</p></small>
           </div>
+          }
         }
       }else{
         @for(metaTip <- metaTips){
-          <div id="infodica" class="panel panel-default">
-            <div class="panel panel-heading"><p>@metaTip.getTitulo</p></div>
-            <div class="panel-body">
-              <p>@metaTip.getConteudo</p>
+          @if(metaTip.getConteudoInapropriado() <= 3) {
+            <div id="infodica" class="panel panel-default">
+              <div class="panel panel-heading"><p>@metaTip.getTitulo <a class="pull-right" href="@routes.Application.conteudoOfensivo(metaTip.getId)" title="Ofensivo"></a></p></div>
+              <div class="panel-body">
+                <p>@metaTip.getConteudo</p>
+              </div>
+              <div><small class="pull-left"><p>escrita por @metaTip.getAutor</p></small></div>
+              <a class="btn pull-right"> ver mais</a>
+              <div></div>
             </div>
-            <div><small class="pull-left"><p>escrita por @metaTip.getAutor</p></small></div>
-            <a class="btn pull-right"> ver mais</a>
-            <div></div>
-          </div>
+          }
         }
       }
     </section>

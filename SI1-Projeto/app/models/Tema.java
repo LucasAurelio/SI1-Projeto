@@ -16,11 +16,14 @@ public class Tema {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     private List<Dica> dicas;
-    private int nota, quant;
+    @JoinColumn
+    private int nota, quant, cont, dificuldade;
 
     public Tema() {
         nota = 0;
         quant = 0;
+        cont = 0;
+        dificuldade = 0;
         metadicas = new ArrayList<>();
         dicas = new ArrayList<>();
     }
@@ -72,5 +75,13 @@ public class Tema {
 
     public void addDica(Dica dica) {
         dicas.add(dica);
+    }
+
+    public int getDificuldade() {
+        return dificuldade/cont;
+    }
+
+    public void addDificuldade(int dificuldade) {
+        this.dificuldade += dificuldade;
     }
 }

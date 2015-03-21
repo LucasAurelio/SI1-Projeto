@@ -16,6 +16,8 @@ public class Dica implements Comparable<Dica>{
     private int concordancias,discordancias;
     @Column
     private double indiceConcordancia;
+    @Column
+    private int conteudoInapropriado;
 
     public Dica(){
     }
@@ -28,6 +30,7 @@ public class Dica implements Comparable<Dica>{
         concordancias = 0;
         discordancias = 0;
         indiceConcordancia = 0.0;
+        conteudoInapropriado = 0;
     }
 
     public long getId(){
@@ -97,6 +100,14 @@ public class Dica implements Comparable<Dica>{
         }else{
             return 0;
         }
+    }
+
+    public void addConteudoInapropriado() {
+        conteudoInapropriado++;
+    }
+
+    public int getConteudoInapropriado() {
+        return conteudoInapropriado;
     }
 }
 
