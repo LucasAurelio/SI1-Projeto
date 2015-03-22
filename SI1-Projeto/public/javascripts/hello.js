@@ -86,3 +86,8 @@ function notaDoTema(){
     "<input type='submit'>" +
     "</form>"
 }
+
+function newJust(){
+    document.getElementById("just").innerHTML = "<textarea id='form3'  cols='50' rows='4' maxlength='100' name='justificativa' placeholder='Digite sua justificativa' required></textarea>" + "<br>" +
+    "<input class='btn' id='form4' type='submit' value='Adicionar'/>"
+}

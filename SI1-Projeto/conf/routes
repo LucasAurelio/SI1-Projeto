@@ -22,7 +22,7 @@ POST        /newMainLink              controllers.Application.newMainLink()
 POST        /newMainDisciplina        controllers.Application.newMainDisciplina()
 POST        /newMainAssunto           controllers.Application.newMainAssunto()
 GET         /cookieUP                 controllers.Application.cookieUP(id: Long)
-GET         /flyUP                    controllers.Application.flyDown(id: Long)
+POST        /flyUP/:id                controllers.Application.flyDown(id: Long)
 GET         /conteudoOfensivo         controllers.Application.conteudoOfensivo(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path

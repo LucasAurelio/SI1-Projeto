@@ -440,6 +440,9 @@ public class Application extends Controller {
     public static Result flyDown(Long id){
         Dica tip = dao.findByEntityId(Dica.class, id);
 
+        DynamicForm form = Form.form().bindFromRequest();
+        String plus = form.get("justificativa");
+
         String nomeDaClasse = null;
         List<Tema> allTemas = dao.findAllByClass(Tema.class);
         for(Tema ttt: allTemas){
@@ -462,6 +465,7 @@ public class Application extends Controller {
         }else{
             rightUser.addDicaVotada(tip);
             tip.addDiscordancia();
+            tip.addJustificativa(plus);
         }
 
 

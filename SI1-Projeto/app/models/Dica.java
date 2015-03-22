@@ -10,19 +10,15 @@ public class Dica implements Comparable<Dica>{
     @GeneratedValue
     private long id;
     @Column
-    private String titulo, conteudo, autor;
+    private String titulo, conteudo, autor,justificativas;
     @Column
     private double concordancias,discordancias;
     @Column
     private double indiceConcordancia;
     @Column
-    private int conteudoInapropriado;
-    @Column
-    @OneToMany
-    private List<User> usuariosComVoto;
+    private int conteudoInapropriado,controle;
 
     public Dica(){
-        usuariosComVoto = new ArrayList<>();
     }
 
     public Dica(String autor, String titulo, String conteudo) {
@@ -34,6 +30,8 @@ public class Dica implements Comparable<Dica>{
         discordancias = 0;
         indiceConcordancia = 0.0;
         conteudoInapropriado = 0;
+        controle = 0;
+        justificativas = "";
     }
 
     public long getId(){
@@ -115,19 +113,26 @@ public class Dica implements Comparable<Dica>{
         return conteudoInapropriado;
     }
 
-    public List<User> getUsuariosComVoto() {
-        return usuariosComVoto;
-    }
-
-    public void addUsuarioComVoto(User usuario){
-        usuariosComVoto.add(usuario);
-    }
 
     public boolean getFechada(){
         if(concordancias==20 || discordancias==20){
             return true;
         }
         return false;
+    }
+
+    private int getControle(){
+        return controle;
+    }
+
+    public void addJustificativa(String just){
+        controle++;
+        justificativas = justificativas + "-------------------------------------------------------------------\n" +
+                "Justificativa de discordância" + this.getControle()+ ":\n" +just+ "----------------------------------------------------------------\n";
+    }
+
+    public String getJustificativas(){
+        return justificativas;
     }
 }
 
