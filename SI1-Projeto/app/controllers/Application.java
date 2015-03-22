@@ -39,6 +39,7 @@ public class Application extends Controller {
 
     @Transactional
     public static Result metaInformation(Long id) {
+        metaTips = dao.findAllByClass(MetaDica.class);
         for(MetaDica metatip: metaTips){
             if(metatip.isVerMais()) metatip.setVerMais(false);
         }
@@ -326,7 +327,7 @@ public class Application extends Controller {
     public static Result newTip() {
         DynamicForm form = Form.form().bindFromRequest();
         metaTips = dao.findAllByClass(MetaDica.class);
-        MetaDica mainTip = null;
+        MetaDica mainTip = new MetaDica();
 
         for(MetaDica metaDica: metaTips){
             if(metaDica.isVerMais()) mainTip = metaDica;
