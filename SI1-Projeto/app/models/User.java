@@ -1,20 +1,22 @@
 package models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "User")
 public class User {
     @Id
     @GeneratedValue
     private long id;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Dica> dicasVotadas;
     @Column
     private String nome, email, password;
 
     public User(){
-
+        dicasVotadas = new ArrayList<>();
     }
 
     public User(String nome, String email, String password)throws Exception{
@@ -76,5 +78,13 @@ public class User {
         if (!email.equals(user.email)) return false;
         if (!password.equals(user.password)) return false;
         return true;
+    }
+
+    public void addDicaVotada(Dica dicaVotada){
+        dicasVotadas.add(dicaVotada);
+    }
+
+    public List<Dica> getDicasVotadas(){
+        return dicasVotadas;
     }
 }

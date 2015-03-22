@@ -1,7 +1,9 @@
 package controllers;
 
 import models.*;
+import models.User;
 import models.dao.GenericDAO;
+import org.h2.engine.*;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.Transactional;
@@ -29,7 +31,8 @@ public class Application extends Controller {
     @Transactional
     public static Result index() {
         if (session().get("user") != null){
-            return redirect(routes.Application.show());
+            session().clear();
+            return ok(index.render("Portal Do Leite", loginForm, registroForm));
         }
         return ok(index.render("Portal Do Leite", loginForm, registroForm));
     }
@@ -85,6 +88,7 @@ public class Application extends Controller {
             return redirect(routes.Application.index());
         } else {
             dao.persist(u);
+            dao.merge(u);
             return redirect(routes.Application.show());
         }
     }
@@ -415,24 +419,19 @@ public class Application extends Controller {
         if (tip.getFechada()) {
             flash("fail", "Este dica está fechada para avaliação");
             return verificaView(nomeDaClasse);
-        }else if (verificaUsuarioComVoto(tip)) {
+        }
+
+        List<User> allUsers = dao.findAllByClass(User.class);
+        User rightUser = allUsers.get(0);
+
+        if (verificaUsuarioComVoto(rightUser, id)) {
             flash("fail", "Você já avaliou essa dica!");
             return verificaView(nomeDaClasse);
+        }else{
+            rightUser.addDicaVotada(tip);
+            tip.addConcordancia();
         }
 
-
-        String userVotando = session().get("user");
-        List<User> allUsers = dao.findAllByClass(User.class);
-        User userComVoto = null;
-
-        for(User user: allUsers){
-            if((user.getNome()).equals(userVotando)){
-                userComVoto = user;
-            }
-        }
-
-        tip.addUsuarioComVoto(userComVoto);
-        tip.addConcordancia();
 
         return verificaView(nomeDaClasse);
     }
@@ -452,34 +451,28 @@ public class Application extends Controller {
         if (tip.getFechada()) {
             flash("fail", "Este dica está fechada para avaliação");
             return verificaView(nomeDaClasse);
-        }else if (verificaUsuarioComVoto(tip)) {
+        }
+
+        List<User> allUsers = dao.findAllByClass(User.class);
+        User rightUser = allUsers.get(0);
+
+        if (verificaUsuarioComVoto(rightUser, id)) {
             flash("fail", "Você já avaliou essa dica!");
             return verificaView(nomeDaClasse);
+        }else{
+            rightUser.addDicaVotada(tip);
+            tip.addDiscordancia();
         }
 
-
-        String userVotando = session().get("user");
-        List<User> allUsers = dao.findAllByClass(User.class);
-        User userComVoto = null;
-
-        for(User user: allUsers){
-            if((user.getNome()).equals(userVotando)){
-                userComVoto = user;
-            }
-        }
-
-        tip.addUsuarioComVoto(userComVoto);
-        tip.addDiscordancia();
 
         return verificaView(nomeDaClasse);
     }
 
-    private static boolean verificaUsuarioComVoto(Dica tip){
-        List<User> usersComVoting= tip.getUsuariosComVoto();
-        String userVoting = session().get("user");
+    private static boolean verificaUsuarioComVoto(User userVotando, Long id){
+        List<Dica> dicasVotadas = userVotando.getDicasVotadas();
 
-        for(User user: usersComVoting){
-            if(user.getNome().equals(userVoting)){
+        for(Dica dica: dicasVotadas){
+            if(dica.getId()==id){
                 return true;
             }
         }
