@@ -402,19 +402,20 @@ public class Application extends Controller {
             }
         }
 
-        if(verificaUsuarioComVoto(tip)){
-            flash("fail", "Você já avaliou essa dica!");
-            return redirect(routes.Application.show());
-        }
-        tip.addConcordancia();
-        tip.addUsuarioComVoto(userComVoto);
-
         String nomeDaClasse = null;
         List<Tema> allTemas = dao.findAllByClass(Tema.class);
         for(Tema ttt: allTemas){
             if(ttt.getTemaFiltro()){
                 nomeDaClasse = ttt.getNome();
             }
+        }
+
+        if (verificaUsuarioComVoto(tip)) {
+            flash("fail", "Você já avaliou essa dica!");
+            return verificaView(nomeDaClasse);
+        }else{
+            tip.addUsuarioComVoto(userComVoto);
+            tip.addConcordancia();
         }
 
         return verificaView(nomeDaClasse);
@@ -434,13 +435,6 @@ public class Application extends Controller {
             }
         }
 
-        if(verificaUsuarioComVoto(tip)){
-            flash("fail", "Você já avaliou essa dica!");
-            return redirect(routes.Application.show());
-        }
-        tip.addDiscordancia();
-        tip.addUsuarioComVoto(userComVoto);
-
         String nomeDaClasse = null;
         List<Tema> allTemas = dao.findAllByClass(Tema.class);
         for(Tema ttt: allTemas){
@@ -449,15 +443,23 @@ public class Application extends Controller {
             }
         }
 
+        if(verificaUsuarioComVoto(tip)) {
+            flash("fail", "Você já avaliou essa dica!");
+            return verificaView(nomeDaClasse);
+        }else{
+            tip.addUsuarioComVoto(userComVoto);
+            tip.addDiscordancia();
+        }
+
         return verificaView(nomeDaClasse);
     }
 
     private static boolean verificaUsuarioComVoto(Dica tip){
-        List<User> usersComVoto = tip.getUsuariosComVoto();
-        String userVotando = session().get("user");
+        List<User> usersComVoting= tip.getUsuariosComVoto();
+        String userVoting = session().get("user");
 
-        for(User user: usersComVoto){
-            if((user.getNome()).equals(userVotando)){
+        for(User user: usersComVoting){
+            if(user.getNome().equals(userVoting)){
                 return true;
             }
         }
