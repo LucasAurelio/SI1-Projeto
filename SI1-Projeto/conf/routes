@@ -24,6 +24,7 @@ POST        /newMainAssunto           controllers.Application.newMainAssunto()
 GET         /cookieUP                 controllers.Application.cookieUP(id: Long)
 POST        /flyUP/:id                controllers.Application.flyDown(id: Long)
 GET         /conteudoOfensivo         controllers.Application.conteudoOfensivo(id: Long)
+GET         /dificuldade              controllers.Application.dificuldade()
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file             controllers.Assets.at(path="/public", file)

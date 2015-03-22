@@ -82,7 +82,7 @@ function newAssunto(){
 
 function notaDoTema(){
     document.getElementById("notaDoTema").innerHTML = "<form method='get' action='/dificuldade'> " +
-    "<input type='dificuldade' name='quantity' min='-2' max='2'> " +
+    "<input type='number' name='quantity' min='-2' max='2'> " +
     "<input type='submit'>" +
     "</form>"
 }

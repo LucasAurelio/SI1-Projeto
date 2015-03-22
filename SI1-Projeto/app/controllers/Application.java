@@ -503,4 +503,45 @@ public class Application extends Controller {
         }
         return redirect(routes.Application.show());
     }
+
+    @Transactional
+    public static Result dificuldade() {
+        DynamicForm form = Form.form().bindFromRequest();
+        int dif = Integer.parseInt(form.get("quantity"));
+
+        String userVotando = session().get("user");
+        List<User> allUSers = dao.findAllByClass(User.class);
+        User userComVoto = null;
+
+        for(User user: allUSers){
+            if(user.getNome().equals(userVotando)){
+                userComVoto = user;
+            }
+        }
+
+        for(Tema tema: temas){
+            if(tema.getTemaFiltro()){
+                if(!usuarioJaAvaliou(tema.getUsersQueDeramAvaliacao(), userComVoto)){
+                    tema.addDificuldade(dif);
+                    tema.addUserQueDeuAvaliacao(userComVoto);
+                }else {
+                    flash("fail", "Você já avaliou esse tema!");
+                }
+            }
+        }
+
+        return redirect(routes.Application.show());
+    }
+
+    public static boolean usuarioJaAvaliou(List<User> usuarios, User userVotando){
+
+        for(User user: usuarios){
+            if(userVotando.equals(user)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

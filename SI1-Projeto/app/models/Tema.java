@@ -19,6 +19,9 @@ public class Tema {
     @JoinColumn
     @OneToMany(cascade = CascadeType.ALL )
     private List<User> usersQueDeramNota;
+    @JoinColumn
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<User> usersQueDeramAvaliacao;
     @Column
     private int quant, dificuldade;
     @Column
@@ -30,6 +33,7 @@ public class Tema {
         metadicas = new ArrayList<>();
         dicas = new ArrayList<>();
         usersQueDeramNota = new ArrayList<>();
+        usersQueDeramAvaliacao = new ArrayList<>();
         temaFiltro = false;
     }
 
@@ -61,6 +65,8 @@ public class Tema {
         return 0.0;
     }
 
+
+
     public List<MetaDica> getMetadicas(){
         return metadicas;
     }
@@ -88,6 +94,14 @@ public class Tema {
 
     public void addUserQueDeuNota(User user){
         usersQueDeramNota.add(user);
+    }
+
+    public List<User> getUsersQueDeramAvaliacao(){
+        return usersQueDeramAvaliacao;
+    }
+
+    public void addUserQueDeuAvaliacao(User user){
+        usersQueDeramAvaliacao.add(user);
     }
 
     public void setTemaFiltroFalse(){
