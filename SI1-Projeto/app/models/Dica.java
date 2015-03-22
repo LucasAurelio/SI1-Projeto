@@ -1,8 +1,9 @@
 package models;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity(name="Dica")
 public class Dica implements Comparable<Dica>{
@@ -127,8 +128,7 @@ public class Dica implements Comparable<Dica>{
 
     public void addJustificativa(String just){
         controle++;
-        justificativas = justificativas + "-------------------------------------------------------------------\n" +
-                "Justificativa de discordância" + this.getControle()+ ":\n" +just+ "----------------------------------------------------------------\n";
+        justificativas = justificativas + "\n" + "discordo pois" + ":\n" +just+ "\n";
     }
 
     public String getJustificativas(){
