@@ -83,9 +83,9 @@ public class Dica implements Comparable<Dica>{
 
     public void calculaIndiceConcordancia(){
         if(concordancias>=1 && discordancias==0){
-            indiceConcordancia = 0;
+            indiceConcordancia = concordancias/(concordancias+discordancias);
         }else if(concordancias==0 && discordancias>=1){
-            indiceConcordancia = discordancias;
+            indiceConcordancia = 0;
         }else if(concordancias==0 && discordancias==0){
             indiceConcordancia = 0;
         }else if(concordancias>=1 && discordancias>=1){
@@ -121,6 +121,13 @@ public class Dica implements Comparable<Dica>{
 
     public void addUsuarioComVoto(User usuario){
         usuariosComVoto.add(usuario);
+    }
+
+    public boolean getFechada(){
+        if(concordancias==20 || discordancias==20){
+            return true;
+        }
+        return false;
     }
 }
 

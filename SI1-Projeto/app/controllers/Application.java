@@ -44,7 +44,14 @@ public class Application extends Controller {
             dao.removeById(Dica.class,id);
         }
 
-        return redirect(routes.Application.show());
+        String nomeDaClasse = null;
+        List<Tema> allTemas = dao.findAllByClass(Tema.class);
+        for(Tema ttt: allTemas){
+            if(ttt.getTemaFiltro()){
+                nomeDaClasse = ttt.getNome();
+            }
+        }
+        return verificaView(nomeDaClasse);
     }
 
     @Transactional
@@ -392,6 +399,23 @@ public class Application extends Controller {
     public static Result cookieUP(Long id){
         Dica tip = dao.findByEntityId(Dica.class, id);
 
+        String nomeDaClasse = null;
+        List<Tema> allTemas = dao.findAllByClass(Tema.class);
+        for(Tema ttt: allTemas){
+            if(ttt.getTemaFiltro()){
+                nomeDaClasse = ttt.getNome();
+            }
+        }
+
+        if (tip.getFechada()) {
+            flash("fail", "Este dica está fechada para avaliação");
+            return verificaView(nomeDaClasse);
+        }else if (verificaUsuarioComVoto(tip)) {
+            flash("fail", "Você já avaliou essa dica!");
+            return verificaView(nomeDaClasse);
+        }
+
+
         String userVotando = session().get("user");
         List<User> allUsers = dao.findAllByClass(User.class);
         User userComVoto = null;
@@ -402,21 +426,8 @@ public class Application extends Controller {
             }
         }
 
-        String nomeDaClasse = null;
-        List<Tema> allTemas = dao.findAllByClass(Tema.class);
-        for(Tema ttt: allTemas){
-            if(ttt.getTemaFiltro()){
-                nomeDaClasse = ttt.getNome();
-            }
-        }
-
-        if (verificaUsuarioComVoto(tip)) {
-            flash("fail", "Você já avaliou essa dica!");
-            return verificaView(nomeDaClasse);
-        }else{
-            tip.addUsuarioComVoto(userComVoto);
-            tip.addConcordancia();
-        }
+        tip.addUsuarioComVoto(userComVoto);
+        tip.addConcordancia();
 
         return verificaView(nomeDaClasse);
     }
@@ -425,16 +436,6 @@ public class Application extends Controller {
     public static Result flyDown(Long id){
         Dica tip = dao.findByEntityId(Dica.class, id);
 
-        String userVotando = session().get("user");
-        List<User> allUSers = dao.findAllByClass(User.class);
-        User userComVoto = null;
-
-        for(User user: allUSers){
-            if(user.getNome().equals(userVotando)){
-                userComVoto = user;
-            }
-        }
-
         String nomeDaClasse = null;
         List<Tema> allTemas = dao.findAllByClass(Tema.class);
         for(Tema ttt: allTemas){
@@ -443,13 +444,27 @@ public class Application extends Controller {
             }
         }
 
-        if(verificaUsuarioComVoto(tip)) {
+        if (tip.getFechada()) {
+            flash("fail", "Este dica está fechada para avaliação");
+            return verificaView(nomeDaClasse);
+        }else if (verificaUsuarioComVoto(tip)) {
             flash("fail", "Você já avaliou essa dica!");
             return verificaView(nomeDaClasse);
-        }else{
-            tip.addUsuarioComVoto(userComVoto);
-            tip.addDiscordancia();
         }
+
+
+        String userVotando = session().get("user");
+        List<User> allUsers = dao.findAllByClass(User.class);
+        User userComVoto = null;
+
+        for(User user: allUsers){
+            if((user.getNome()).equals(userVotando)){
+                userComVoto = user;
+            }
+        }
+
+        tip.addUsuarioComVoto(userComVoto);
+        tip.addDiscordancia();
 
         return verificaView(nomeDaClasse);
     }
