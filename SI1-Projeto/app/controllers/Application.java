@@ -36,6 +36,17 @@ public class Application extends Controller {
         }
         return ok(index.render("Portal Do Leite", loginForm, registroForm));
     }
+
+    @Transactional
+    public static Result metaInformation(Long id) {
+        for(MetaDica metatip: metaTips){
+            if(metatip.isVerMais()) metatip.setVerMais(false);
+        }
+        MetaDica metaTip = dao.findByEntityId(MetaDica.class, id);
+        metaTip.setVerMais(true);
+
+        return redirect(routes.Application.show());
+    }
     
     @Transactional
     public static Result conteudoOfensivo(Long id) {
@@ -312,6 +323,29 @@ public class Application extends Controller {
     }
 
     @Transactional
+    public static Result newTip() {
+        DynamicForm form = Form.form().bindFromRequest();
+        metaTips = dao.findAllByClass(MetaDica.class);
+        MetaDica mainTip = null;
+
+        for(MetaDica metaDica: metaTips){
+            if(metaDica.isVerMais()) mainTip = metaDica;
+        }
+
+        String autor = session().get("user");
+        String titulo = form.get("titulo");
+        String descricao = form.get("descricao");
+
+        Dica newTip = new Dica(autor, titulo, descricao);
+        dao.persist(newTip);
+
+        mainTip.addDica(newTip);
+        dao.merge(mainTip);
+
+        return redirect(routes.Application.show());
+    }
+
+    @Transactional
     public static Result newMainLink(){
         DynamicForm form = Form.form().bindFromRequest();
 
@@ -543,5 +577,4 @@ public class Application extends Controller {
 
         return false;
     }
-
 }

@@ -76,6 +76,23 @@ body {
     border-radius:7px;
 }
 
+#infodica3{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: auto;
+    margin-top: 3%;
+    color:#868686;
+    text-align: center;
+    align-content: center;
+    border:3px #E0E0E0 solid;
+
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
+
+}
+
 #titulo{
     align-self: center;
     margin-left: 9%;
@@ -112,6 +129,10 @@ body {
 }
 
 #newTip{
+    align-content: center;
+}
+
+#newTip2{
     align-content: center;
 }
 

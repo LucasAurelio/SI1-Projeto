@@ -84,14 +84,37 @@
             <div class="panel-body">
               <p>@metaTip.getConteudo</p>
               <div><small class="pull-left"><p>escrita por @metaTip.getAutor</p></small></div>
-            <a class="btn pull-right"> ver mais</a>
+              <a class="pull-right" href="@routes.Application.metaInformation(metaTip.getId())"> ver mais</a>
             </div>
           </div>
         }
       }
     </section>
+
     <subsection id="showing2">
+    @for(metaTip <- metaTips){
+      @if(metaTip.isVerMais){
+        <div id="infodica3" class="panel panel-default">
+          <div class="panel panel-heading"><p>@metaTip.getTitulo</p></div>
+          <div class="panel-body">
+            <div><small class="pull-left"><p>escrita por @metaTip.getAutor</p></small></div>
+            <a class="btn pull-right" onclick="javascrpit:newTip2()">+DICA</a>
+            <div id="newTip2"> </div>
+          </div>
+        </div>
+          @for(tip <- metaTip.getDicas){
+            <div id="infodica3" class="panel panel-default">
+              <div class="panel panel-heading"><p>@tip.getTitulo</p></div>
+              <div class="panel-body">
+                <p>@tip.getConteudo</p>
+                <div><small class="pull-left"><p>escrita por @tip.getAutor</p></small></div>
+              </div>
+            </div>
+          }
+          }
+    }
     </subsection>
+
     <footer>
       <small class="copyright">
         <p>Copyright © 2015 - Todos os Direitos Reservados a Erick Santana e Lucas Aurelio <a id="logout" href="/logout" class="btn pull-right"> Log Out</a></p>

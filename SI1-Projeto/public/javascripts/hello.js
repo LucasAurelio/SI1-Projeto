@@ -17,6 +17,14 @@ function newTip(){
     "</form>";
 }
 
+function newTip2(){
+    document.getElementById('newTip2').innerHTML = "<form method='post' action='/newTip'>" +
+    "<input name='titulo' id='form2' type='text' placeholder='Título' required/>" +
+    "<textarea id='form3'  cols='50' rows='4' name='descricao'></textarea>" + "<br>" +
+    "<input class='btn' id='form4' type='submit' value='Adicionar'/>" +
+    "</form>";
+}
+
 function newLink(){
     document.getElementById('newTip').innerHTML = "<form method='post' action='/newMainLink'>" +
     "<select name='topico' id='form5'>" +
