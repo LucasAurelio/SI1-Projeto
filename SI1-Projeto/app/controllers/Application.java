@@ -65,6 +65,9 @@ public class Application extends Controller {
             for (Tema tema: temas){
                 if (tema.getNome().equals("Geral")){
                     metaTips = tema.getMetadicas();
+                    tema.setTemaFiltroTrue();
+                }else{
+                    tema.setTemaFiltroFalse();
                 }
             }
             return ok(forum.render("Meu Forum", metaTips, tips));
@@ -130,6 +133,9 @@ public class Application extends Controller {
             for (Tema tema: temas){
                 if (tema.getNome().equals("Geral")){
                     metaTips = tema.getMetadicas();
+                    tema.setTemaFiltroTrue();
+                }else{
+                    tema.setTemaFiltroFalse();
                 }
             }
             return ok(forum.render("Meu Forum",metaTips,tips));
@@ -292,7 +298,6 @@ public class Application extends Controller {
             if (theme.getNome().equals(tema)){
                 if(tema.equals("Geral")){
                     theme.addMetaDica(newMainTip);
-
                 }else{
                     theme.addDica(newTip);
                 }
