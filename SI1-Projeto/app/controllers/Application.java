@@ -42,10 +42,14 @@ public class Application extends Controller {
     public static Result metaInformation(Long id) {
         metaTips = dao.findAllByClass(MetaDica.class);
         for(MetaDica metatip: metaTips){
-            if(metatip.isVerMais()) metatip.setVerMais(false);
+            if(metatip.isVerMais()) {
+                metatip.setVerMais(false);
+                dao.merge(metatip);
+            }
         }
         MetaDica metaTip = dao.findByEntityId(MetaDica.class, id);
         metaTip.setVerMais(true);
+        dao.merge(metaTip);
 
         return redirect(routes.Application.show());
     }
@@ -69,6 +73,8 @@ public class Application extends Controller {
         }else{
             tip.addConteudoInapropriado();
             userFlagging.addDicaFlag(tip);
+            dao.merge(tip);
+            dao.merge(userFlagging);
         }
         if (tip.getConteudoInapropriado()==3){
             dao.removeById(Dica.class,id);
@@ -120,7 +126,6 @@ public class Application extends Controller {
             return redirect(routes.Application.show());
         }
     }
-
 
     private static boolean validateRegistro(String email) {
         List<User> u = dao.findByAttributeName("User", "email", email);
@@ -199,8 +204,10 @@ public class Application extends Controller {
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
                 mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
+                dao.merge(tema);
             }else{
                 tema.setTemaFiltroFalse();
+                dao.merge(tema);
             }
         }
         Collections.sort(tips);
@@ -218,8 +225,10 @@ public class Application extends Controller {
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
                 mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
+                dao.merge(tema);
             }else{
                 tema.setTemaFiltroFalse();
+                dao.merge(tema);
             }
         }
         Collections.sort(tips);
@@ -237,8 +246,10 @@ public class Application extends Controller {
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
                 mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
+                dao.merge(tema);
             }else{
                 tema.setTemaFiltroFalse();
+                dao.merge(tema);
             }
         }
         Collections.sort(tips);
@@ -256,8 +267,10 @@ public class Application extends Controller {
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
                 mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
+                dao.merge(tema);
             }else{
                 tema.setTemaFiltroFalse();
+                dao.merge(tema);
             }
         }
         Collections.sort(tips);
@@ -275,8 +288,10 @@ public class Application extends Controller {
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
                 mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
+                dao.merge(tema);
             }else{
                 tema.setTemaFiltroFalse();
+                dao.merge(tema);
             }
         }
         Collections.sort(tips);
@@ -294,8 +309,10 @@ public class Application extends Controller {
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
                 mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
+                dao.merge(tema);
             }else{
                 tema.setTemaFiltroFalse();
+                dao.merge(tema);
             }
         }
         Collections.sort(tips);
@@ -313,8 +330,10 @@ public class Application extends Controller {
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
                 mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
+                dao.merge(tema);
             }else{
                 tema.setTemaFiltroFalse();
+                dao.merge(tema);
             }
         }
         Collections.sort(tips);
@@ -333,13 +352,20 @@ public class Application extends Controller {
         MetaDica newMainTip = new MetaDica(autor,titulo,descricao);
         Dica newTip = new Dica(autor, titulo, descricao);
 
+
         temas = dao.findAllByClass(Tema.class);
         for (Tema theme: temas){
             if (theme.getNome().equals(tema)){
                 if(tema.equals("Geral")){
+                    dao.persist(newMainTip);
+                    dao.merge(newMainTip);
                     theme.addMetaDica(newMainTip);
+                    dao.merge(theme);
                 }else{
                     theme.addDica(newTip);
+                    dao.persist(newTip);
+                    dao.merge(newTip);
+                    dao.merge(theme);
                 }
             }
         }
@@ -363,6 +389,7 @@ public class Application extends Controller {
 
         Dica newTip = new Dica(autor, titulo, descricao);
         dao.persist(newTip);
+        dao.merge(newTip);
 
         mainTip.addDica(newTip);
         dao.merge(mainTip);
@@ -391,10 +418,15 @@ public class Application extends Controller {
         for (Tema theme: temas){
             if (theme.getNome().equals(tema)){
                 if(tema.equals("Geral")){
+                    dao.persist(newMainTip);
+                    dao.merge(newMainTip);
                     theme.addMetaDica(newMainTip);
-
+                    dao.merge(theme);
                 }else{
+                    dao.persist(newTip);
+                    dao.merge(newTip);
                     theme.addDica(newTip);
+                    dao.merge(theme);
                 }
             }
         }
@@ -425,10 +457,15 @@ public class Application extends Controller {
         for (Tema theme: temas){
             if (theme.getNome().equals(tema)){
                 if(tema.equals("Geral")){
+                    dao.persist(newMainTip);
+                    dao.merge(newMainTip);
                     theme.addMetaDica(newMainTip);
-
+                    dao.merge(theme);
                 }else{
+                    dao.persist(newTip);
+                    dao.merge(newTip);
                     theme.addDica(newTip);
+                    dao.merge(theme);
                 }
             }
         }
@@ -452,10 +489,15 @@ public class Application extends Controller {
         for (Tema theme: temas){
             if (theme.getNome().equals(tema)){
                 if(tema.equals("Geral")){
+                    dao.persist(newMainTip);
+                    dao.merge(newMainTip);
                     theme.addMetaDica(newMainTip);
-
+                    dao.merge(theme);
                 }else{
+                    dao.persist(newTip);
+                    dao.merge(newTip);
                     theme.addDica(newTip);
+                    dao.merge(theme);
                 }
             }
         }
@@ -494,7 +536,9 @@ public class Application extends Controller {
                 return verificaView(nomeDaClasse);
             }else{
                 userComVoto.addDicaVotadasMeta(tip);
+                dao.merge(userComVoto);
                 tip.addConcordancia();
+                dao.merge(tip);
             }
         }else{
             Dica tip = dao.findByEntityId(Dica.class, id);
@@ -507,7 +551,9 @@ public class Application extends Controller {
                 return verificaView(nomeDaClasse);
             }else{
                 userComVoto.addDicaVotada(tip);
+                dao.merge(userComVoto);
                 tip.addConcordancia();
+                dao.merge(tip);
             }
         }
 
@@ -548,8 +594,10 @@ public class Application extends Controller {
                 return verificaView(nomeDaClasse);
             }else{
                 userComVoto.addDicaVotadasMeta(tip);
+                dao.merge(userComVoto);
                 tip.addDiscordancia();
                 tip.addJustificativa(plus);
+                dao.merge(tip);
             }
         }else{
             Dica tip = dao.findByEntityId(Dica.class,id);
@@ -562,8 +610,10 @@ public class Application extends Controller {
                 return verificaView(nomeDaClasse);
             }else{
                 userComVoto.addDicaVotada(tip);
+                dao.merge(userComVoto);
                 tip.addDiscordancia();
                 tip.addJustificativa(plus);
+                dao.merge(tip);
             }
         }
 
@@ -641,7 +691,9 @@ public class Application extends Controller {
             flash("fail", "Você já avaliou esse tema!");
         }else{
             temaASerAvaliado.addDificuldade(dif);
+            dao.merge(temaASerAvaliado);
             userComVoto.addTemaAvaliado(temaASerAvaliado);
+            dao.merge(userComVoto);
         }
 
         return verificaView(temaASerAvaliado.getNome());
