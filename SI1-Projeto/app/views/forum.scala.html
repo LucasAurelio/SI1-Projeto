@@ -86,8 +86,22 @@
             <div class="panel panel-heading"><p>@metaTip.getTitulo</p></div>
             <div class="panel-body">
               <p>@metaTip.getConteudo</p>
+              <br>
+              <br>
               <div><small class="pull-left"><p>escrita por @metaTip.getAutor</p></small></div>
-              <a class="pull-right" href="@routes.Application.metaInformation(metaTip.getId())"> ver mais</a>
+              <a class="pull-right" id="flyDown" onclick="javascript:newJust()"  title="Discordo!"></a>
+              <a class="pull-right" id="cookieUP" href="@routes.Application.cookieUP(metaTip.getId)" title="Concordo!"></a>
+              <small><p id="indice">Índice de concordância: @metaTip.getIndiceConcordancia</p></small>
+              <br>
+              <a href="@routes.Application.metaInformation(metaTip.getId())"> ver mais</a>
+              <div>
+                <form method='post' action='/flyUP/@metaTip.getId'>
+                  <div id="just"></div>
+                </form>
+              </div>
+              <div><p>@metaTip.getJustificativas</p></div>
+
+              <div id="just"></div>
             </div>
           </div>
         }

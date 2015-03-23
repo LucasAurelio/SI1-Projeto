@@ -14,6 +14,9 @@ public class User {
     private List<Dica> dicasVotadas;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
+    private List<MetaDica> dicasVotadasMeta;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
     private List<Tema> temasAvaliados;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
@@ -25,6 +28,7 @@ public class User {
         dicasVotadas = new ArrayList<>();
         dicasFlag = new ArrayList<>();
         temasAvaliados = new ArrayList<>();
+        dicasVotadasMeta = new ArrayList<>();
     }
 
     public User(String nome, String email, String password)throws Exception{
@@ -110,5 +114,13 @@ public class User {
 
     public List<Tema> getTemasAvaliados(){
         return temasAvaliados;
+    }
+
+    public void addDicaVotadasMeta(MetaDica dicaVotada){
+        dicasVotadasMeta.add(dicaVotada);
+    }
+
+    public List<MetaDica> getDicasVotadasMeta(){
+        return dicasVotadasMeta;
     }
 }

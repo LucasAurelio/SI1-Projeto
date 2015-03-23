@@ -465,19 +465,12 @@ public class Application extends Controller {
 
     @Transactional
     public static Result cookieUP(Long id){
-        Dica tip = dao.findByEntityId(Dica.class, id);
-
-        String nomeDaClasse = null;
+        String nomeDaClasse = "";
         List<Tema> allTemas = dao.findAllByClass(Tema.class);
         for(Tema ttt: allTemas){
             if(ttt.getTemaFiltro()){
                 nomeDaClasse = ttt.getNome();
             }
-        }
-
-        if (tip.getFechada()) {
-            flash("fail", "Este dica está fechada para avaliação");
-            return verificaView(nomeDaClasse);
         }
 
         String userVotando = session().get("user");
@@ -490,22 +483,39 @@ public class Application extends Controller {
             }
         }
 
-        if (verificaUsuarioComVoto(userComVoto, id)) {
-            flash("fail", "Você já avaliou essa dica!");
-            return verificaView(nomeDaClasse);
+        if(nomeDaClasse.equals("Geral")){
+            MetaDica tip = dao.findByEntityId(MetaDica.class, id);
+            if (tip.getFechada()) {
+                flash("fail", "Este dica está fechada para avaliação");
+                return verificaView(nomeDaClasse);
+            }
+            if (verificaUsuarioComVotoMeta(userComVoto, id)) {
+                flash("fail", "Você já avaliou essa dica!");
+                return verificaView(nomeDaClasse);
+            }else{
+                userComVoto.addDicaVotadasMeta(tip);
+                tip.addConcordancia();
+            }
         }else{
-            userComVoto.addDicaVotada(tip);
-            tip.addConcordancia();
+            Dica tip = dao.findByEntityId(Dica.class, id);
+            if (tip.getFechada()) {
+                flash("fail", "Este dica está fechada para avaliação");
+                return verificaView(nomeDaClasse);
+            }
+            if (verificaUsuarioComVoto(userComVoto, id)) {
+                flash("fail", "Você já avaliou essa dica!");
+                return verificaView(nomeDaClasse);
+            }else{
+                userComVoto.addDicaVotada(tip);
+                tip.addConcordancia();
+            }
         }
-
 
         return verificaView(nomeDaClasse);
     }
 
     @Transactional
     public static Result flyDown(Long id){
-        Dica tip = dao.findByEntityId(Dica.class, id);
-
         DynamicForm form = Form.form().bindFromRequest();
         String plus = form.get("justificativa");
 
@@ -517,11 +527,6 @@ public class Application extends Controller {
             }
         }
 
-        if (tip.getFechada()) {
-            flash("fail", "Este dica está fechada para avaliação");
-            return verificaView(nomeDaClasse);
-        }
-
         String userVotando = session().get("user");
         List<User> allUSers = dao.findAllByClass(User.class);
         User userComVoto = new User();
@@ -532,15 +537,35 @@ public class Application extends Controller {
             }
         }
 
-        if (verificaUsuarioComVoto(userComVoto, id)) {
-            flash("fail", "Você já avaliou essa dica!");
-            return verificaView(nomeDaClasse);
+        if(nomeDaClasse.equals("Geral")){
+            MetaDica tip = dao.findByEntityId(MetaDica.class,id);
+            if (tip.getFechada()) {
+                flash("fail", "Este dica está fechada para avaliação");
+                return verificaView(nomeDaClasse);
+            }
+            if (verificaUsuarioComVotoMeta(userComVoto, id)) {
+                flash("fail", "Você já avaliou essa dica!");
+                return verificaView(nomeDaClasse);
+            }else{
+                userComVoto.addDicaVotadasMeta(tip);
+                tip.addDiscordancia();
+                tip.addJustificativa(plus);
+            }
         }else{
-            userComVoto.addDicaVotada(tip);
-            tip.addDiscordancia();
-            tip.addJustificativa(plus);
+            Dica tip = dao.findByEntityId(Dica.class,id);
+            if (tip.getFechada()) {
+                flash("fail", "Este dica está fechada para avaliação");
+                return verificaView(nomeDaClasse);
+            }
+            if (verificaUsuarioComVoto(userComVoto, id)) {
+                flash("fail", "Você já avaliou essa dica!");
+                return verificaView(nomeDaClasse);
+            }else{
+                userComVoto.addDicaVotada(tip);
+                tip.addDiscordancia();
+                tip.addJustificativa(plus);
+            }
         }
-
 
         return verificaView(nomeDaClasse);
     }
@@ -549,6 +574,17 @@ public class Application extends Controller {
         List<Dica> dicasVotadas = userVotando.getDicasVotadas();
 
         for(Dica dica: dicasVotadas){
+            if(dica.getId()==id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean verificaUsuarioComVotoMeta(User userVotando, Long id){
+        List<MetaDica> dicasVotadas = userVotando.getDicasVotadasMeta();
+
+        for(MetaDica dica: dicasVotadas){
             if(dica.getId()==id){
                 return true;
             }
