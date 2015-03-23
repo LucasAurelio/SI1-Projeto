@@ -128,7 +128,7 @@ public class Dica implements Comparable<Dica>{
 
     public void addJustificativa(String just){
         controle++;
-        justificativas = justificativas + "\n" + "discordo pois" + ":\n" +just+ "\n";
+        justificativas = justificativas + "\n" + "discordo pois" + ":\n" +just+ "\n" + " | ";
     }
 
     public String getJustificativas(){
