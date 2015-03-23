@@ -54,13 +54,27 @@ public class Application extends Controller {
     public static Result conteudoOfensivo(Long id) {
         Dica tip = dao.findByEntityId(Dica.class, id);
 
-        tip.addConteudoInapropriado();
+        String userDandoFlag= session().get("user");
+        List<User> allUSers = dao.findAllByClass(User.class);
+        User userFlagging = new User();
 
+        for(User user: allUSers){
+            if(user.getNome().equals(userDandoFlag)){
+                userFlagging = user;
+            }
+        }
+
+        if(usuarioJaDeuFlag(userFlagging,tip.getId())){
+            flash("fail", "Você já denunciou essa dica!");
+        }else{
+            tip.addConteudoInapropriado();
+            userFlagging.addDicaFlag(tip);
+        }
         if (tip.getConteudoInapropriado()==3){
             dao.removeById(Dica.class,id);
         }
 
-        String nomeDaClasse = null;
+        String nomeDaClasse = "";
         List<Tema> allTemas = dao.findAllByClass(Tema.class);
         for(Tema ttt: allTemas){
             if(ttt.getTemaFiltro()){
@@ -597,11 +611,22 @@ public class Application extends Controller {
         return verificaView(temaASerAvaliado.getNome());
     }
 
-    public static boolean usuarioJaAvaliou(User usuarioAvaliando, Long id){
+    private static boolean usuarioJaAvaliou(User usuarioAvaliando, Long id){
         List<Tema> temasAvaliados = usuarioAvaliando.getTemasAvaliados();
 
         for(Tema t: temasAvaliados){
             if(t.getId()==id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean usuarioJaDeuFlag(User userDandoFlag, Long id){
+        List<Dica> dicasFlag = userDandoFlag.getDicasFlag();
+
+        for(Dica di: dicasFlag){
+            if(di.getId()==id){
                 return true;
             }
         }

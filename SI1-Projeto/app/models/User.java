@@ -97,7 +97,7 @@ public class User {
     }
 
     public void addDicaFlag(Dica dicaFlag){
-        dicasVotadas.add(dicaFlag);
+        dicasFlag.add(dicaFlag);
     }
 
     public List<Dica> getDicasFlag(){
