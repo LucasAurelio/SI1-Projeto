@@ -26,6 +26,7 @@ public class Application extends Controller {
     private static List<Tema> temas = null;
     private static List<Dica> tips = null;
     private static List<MetaDica> metaTips = null;
+    private static double mediaDificuldadeDoTemaEmQuestao = 0.0;
 
 
     @Transactional
@@ -85,7 +86,8 @@ public class Application extends Controller {
                     tema.setTemaFiltroFalse();
                 }
             }
-            return ok(forum.render("Meu Forum", metaTips, tips));
+            mediaDificuldadeDoTemaEmQuestao = 0.0;
+            return ok(forum.render("Meu Forum", metaTips, tips,mediaDificuldadeDoTemaEmQuestao));
         }
         return redirect(routes.Application.index());
     }
@@ -154,7 +156,8 @@ public class Application extends Controller {
                     tema.setTemaFiltroFalse();
                 }
             }
-            return ok(forum.render("Meu Forum",metaTips,tips));
+            mediaDificuldadeDoTemaEmQuestao = 0.0;
+            return ok(forum.render("Meu Forum", metaTips, tips,mediaDificuldadeDoTemaEmQuestao));
         }
     }
 
@@ -181,12 +184,13 @@ public class Application extends Controller {
             if (tema.getNome().equals("Laboratórios")){
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
+                mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
             }else{
                 tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
-        return ok(forum.render("Meu Forum", metaTips, tips));
+        return ok(forum.render("Meu Forum", metaTips, tips,mediaDificuldadeDoTemaEmQuestao));
     }
 
     @Transactional
@@ -199,12 +203,13 @@ public class Application extends Controller {
             if (tema.getNome().equals("Minitestes")){
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
+                mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
             }else{
                 tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
-        return ok(forum.render("Meu Forum", metaTips, tips));
+        return ok(forum.render("Meu Forum", metaTips, tips, mediaDificuldadeDoTemaEmQuestao));
     }
 
     @Transactional
@@ -217,12 +222,13 @@ public class Application extends Controller {
             if (tema.getNome().equals("Projeto")){
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
+                mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
             }else{
                 tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
-        return ok(forum.render("Meu Forum", metaTips, tips));
+        return ok(forum.render("Meu Forum", metaTips, tips,mediaDificuldadeDoTemaEmQuestao));
     }
 
     @Transactional
@@ -235,12 +241,13 @@ public class Application extends Controller {
             if (tema.getNome().equals("Heroku")){
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
+                mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
             }else{
                 tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
-        return ok(forum.render("Meu Forum", metaTips, tips));
+        return ok(forum.render("Meu Forum", metaTips, tips, mediaDificuldadeDoTemaEmQuestao));
     }
 
     @Transactional
@@ -253,12 +260,13 @@ public class Application extends Controller {
             if (tema.getNome().equals("PadroesDeProjeto")){
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
+                mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
             }else{
                 tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
-        return ok(forum.render("Meu Forum", metaTips, tips));
+        return ok(forum.render("Meu Forum", metaTips, tips,mediaDificuldadeDoTemaEmQuestao));
     }
 
     @Transactional
@@ -271,12 +279,13 @@ public class Application extends Controller {
             if (tema.getNome().equals("Ferramentas")){
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
+                mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
             }else{
                 tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
-        return ok(forum.render("Meu Forum", metaTips, tips));
+        return ok(forum.render("Meu Forum", metaTips, tips,mediaDificuldadeDoTemaEmQuestao));
     }
 
     @Transactional
@@ -289,12 +298,13 @@ public class Application extends Controller {
             if (tema.getNome().equals("Design")){
                 tips = tema.getDicas();
                 tema.setTemaFiltroTrue();
+                mediaDificuldadeDoTemaEmQuestao = tema.getMediaDificuldade();
             }else{
                 tema.setTemaFiltroFalse();
             }
         }
         Collections.sort(tips);
-        return ok(forum.render("Meu Forum", metaTips, tips));
+        return ok(forum.render("Meu Forum", metaTips, tips, mediaDificuldadeDoTemaEmQuestao));
     }
 
     @Transactional
@@ -456,14 +466,21 @@ public class Application extends Controller {
             return verificaView(nomeDaClasse);
         }
 
-        List<User> allUsers = dao.findAllByClass(User.class);
-        User rightUser = allUsers.get(0);
+        String userVotando = session().get("user");
+        List<User> allUSers = dao.findAllByClass(User.class);
+        User userComVoto = new User();
 
-        if (verificaUsuarioComVoto(rightUser, id)) {
+        for(User user: allUSers){
+            if(user.getNome().equals(userVotando)){
+                userComVoto = user;
+            }
+        }
+
+        if (verificaUsuarioComVoto(userComVoto, id)) {
             flash("fail", "Você já avaliou essa dica!");
             return verificaView(nomeDaClasse);
         }else{
-            rightUser.addDicaVotada(tip);
+            userComVoto.addDicaVotada(tip);
             tip.addConcordancia();
         }
 
@@ -478,7 +495,7 @@ public class Application extends Controller {
         DynamicForm form = Form.form().bindFromRequest();
         String plus = form.get("justificativa");
 
-        String nomeDaClasse = null;
+        String nomeDaClasse = "";
         List<Tema> allTemas = dao.findAllByClass(Tema.class);
         for(Tema ttt: allTemas){
             if(ttt.getTemaFiltro()){
@@ -491,14 +508,21 @@ public class Application extends Controller {
             return verificaView(nomeDaClasse);
         }
 
-        List<User> allUsers = dao.findAllByClass(User.class);
-        User rightUser = allUsers.get(0);
+        String userVotando = session().get("user");
+        List<User> allUSers = dao.findAllByClass(User.class);
+        User userComVoto = new User();
 
-        if (verificaUsuarioComVoto(rightUser, id)) {
+        for(User user: allUSers){
+            if(user.getNome().equals(userVotando)){
+                userComVoto = user;
+            }
+        }
+
+        if (verificaUsuarioComVoto(userComVoto, id)) {
             flash("fail", "Você já avaliou essa dica!");
             return verificaView(nomeDaClasse);
         }else{
-            rightUser.addDicaVotada(tip);
+            userComVoto.addDicaVotada(tip);
             tip.addDiscordancia();
             tip.addJustificativa(plus);
         }
@@ -544,9 +568,18 @@ public class Application extends Controller {
         DynamicForm form = Form.form().bindFromRequest();
         int dif = Integer.parseInt(form.get("quantity"));
 
+
+        Tema temaASerAvaliado = new Tema();
+        List<Tema> allTemas = dao.findAllByClass(Tema.class);
+        for(Tema ttt: allTemas){
+            if(ttt.getTemaFiltro()){
+                temaASerAvaliado = ttt;
+            }
+        }
+
         String userVotando = session().get("user");
         List<User> allUSers = dao.findAllByClass(User.class);
-        User userComVoto = null;
+        User userComVoto = new User();
 
         for(User user: allUSers){
             if(user.getNome().equals(userVotando)){
@@ -554,28 +587,24 @@ public class Application extends Controller {
             }
         }
 
-        for(Tema tema: temas){
-            if(tema.getTemaFiltro()){
-                if(!usuarioJaAvaliou(tema.getUsersQueDeramAvaliacao(), userComVoto)){
-                    tema.addDificuldade(dif);
-                    tema.addUserQueDeuAvaliacao(userComVoto);
-                }else {
-                    flash("fail", "Você já avaliou esse tema!");
-                }
-            }
+        if(usuarioJaAvaliou(userComVoto,temaASerAvaliado.getId())){
+            flash("fail", "Você já avaliou esse tema!");
+        }else{
+            temaASerAvaliado.addDificuldade(dif);
+            userComVoto.addTemaAvaliado(temaASerAvaliado);
         }
 
-        return redirect(routes.Application.show());
+        return verificaView(temaASerAvaliado.getNome());
     }
 
-    public static boolean usuarioJaAvaliou(List<User> usuarios, User userVotando){
+    public static boolean usuarioJaAvaliou(User usuarioAvaliando, Long id){
+        List<Tema> temasAvaliados = usuarioAvaliando.getTemasAvaliados();
 
-        for(User user: usuarios){
-            if(userVotando.equals(user)){
+        for(Tema t: temasAvaliados){
+            if(t.getId()==id){
                 return true;
             }
         }
-
         return false;
     }
 }

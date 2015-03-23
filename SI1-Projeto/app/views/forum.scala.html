@@ -1,4 +1,4 @@
-@(message: String)(metaTips: List[MetaDica])(tips: List[Dica])
+@(message: String)(metaTips: List[MetaDica])(tips: List[Dica])(hard: Double)
 
 @main("Meu Forum") {
 
@@ -53,6 +53,9 @@
         }
         </div>
       </div>
+      @if(hard!=0.0){
+        <div> <p>Dificuldade do tema: @hard</p></div>
+      }
       @if(metaTips==null){
         @for(tip <- tips){
           <div id="infodica" class="panel panel-default">
