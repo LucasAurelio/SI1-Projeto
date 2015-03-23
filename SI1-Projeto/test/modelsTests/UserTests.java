@@ -14,12 +14,6 @@ public class UserTests extends abstractTest{
     List<User> users;
 
     @Test
-    public void mustStartWithNoUsers() throws Exception {
-        users = dao.findAllByClass(User.class);
-        assertThat(users).isEmpty();
-    }
-
-    @Test
     public void mustAddUserToDB() throws Exception {
         User user = new User("Erick", "ericksantanardgs01@gmail.com", "12345");
         dao.persist(user);
@@ -27,5 +21,11 @@ public class UserTests extends abstractTest{
         users = dao.findAllByClass(User.class);
         assertThat(users.size()).isEqualTo(1);
         assertThat(users.get(0)).isEqualTo(user);
+    }
+
+    @Test
+    public void mustStartEmptyDB() throws Exception {
+        users = dao.findAllByClass(User.class);
+        assertThat(users).isEmpty();
     }
 }
